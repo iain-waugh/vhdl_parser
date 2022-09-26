@@ -198,7 +198,7 @@ double_grtr            <- ">>"   # VHDL-2008 only
 absolute_pathname <- dot partial_pathname
 
 # Section 15.5.1
-abstract_literal <- decimal_literal / based_literal
+abstract_literal <- based_literal / decimal_literal
 
 # Section 5.4.1
 access_type_definition <- _access subtype_indication
@@ -317,7 +317,7 @@ base <- integer
 base_specifier <- 'B' / 'O' / 'X' / 'UB' / 'UO' / 'UX' / 'SB' / 'SO' / 'SX' / 'D'
 
 # Section 15.5.3
-based_integer <- extended_digit ( ( underline )? extended_digit )*
+based_integer <- < extended_digit ( ( underline )? extended_digit )* >
 
 # Section 15.5.3
 based_literal <-
