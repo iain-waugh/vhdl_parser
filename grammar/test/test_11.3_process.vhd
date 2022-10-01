@@ -32,16 +32,20 @@ begin
           null;
         else
 
-          if (pixel_red = unsigned(all_ones(C_BITS_RED))) then
+          my_if : if (pixel_red = unsigned(all_ones(C_BITS_RED))) then
             pixel_green <= pixel_green + 1;
 
             if (pixel_green = unsigned(all_ones(C_BITS_GREEN))) then
               pixel_blue <= pixel_blue + 1;
             end if;
-          end if;
+          end if my_if;
         end if;
       end if;
     end if;
   end process;
-  
+
+  tiny : process
+  begin
+  end process tiny;
+
 end test;
