@@ -17,15 +17,16 @@ use ieee.std_logic_1164.all;
 architecture test of vhdl_signal_assignment is
 begin
 
-  o_led <= led;
+  sig11 <= led;
 
-  d_led <= transport led after 20 ns;
+  sig12 <= transport led after 20 ns;
 
-  zero <= (others => '0');
+  sig13 <= (others => '0');
+--  sig14 <= my_array(0, 2 downto 0);
 
-  func_result <= guarded my_func(param);
+  sig15 <= guarded my_func(param);
 
-  led(led'high downto 6)   <= (1 => '1', others => '0');
-  led(led'low to led'high) <= (1 => '1', others => '0');
+  sig16(led'high -1 downto 6) <= (1 => '1', others => '0');
+  sig17(led'low to led'high)  <= (1 => '1', 2 => 'X', others => '0');
 
 end test;

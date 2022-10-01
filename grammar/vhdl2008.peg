@@ -135,6 +135,27 @@ _sequence     <- "sequence"i  # VHDL-2008 only
 #_vprop        <- 'vprop'i     # VHDL-2008 only
 _vunit        <- 'vunit'i     # VHDL-2008 only
 
+keyword <- _abs / _access / _after / _alias / _all / _and / _architecture / _array / _assert / _attribute
+/ _begin / _block / _body / _buffer / _bus
+/ _case / _component / _configuration / _constant / _context
+/ _disconnect / _downto
+/ _else / _elsif / _end / _entity / _exit
+/ _file / _for / _force / _function
+/ _generate / _generic / _group / _guarded 
+/ _if / _impure / _in / _inertial / _inout / _is
+/ _label / _library / _linkage / _literal / _loop
+/ _map / _mod 
+/ _nand / _new / _next / _nor / _not / _null
+/ _of / _on / _open / _or / _others / _out
+/ _package / _parameter / _port / _postponed / _procedure / _process / _protected / _pure
+/ _range / _record / _register / _reject / _release / _rem / _report / _return / _rol / _ror
+/ _select / _severity / _signal / _shared / _sla / _sll / _sra / _srl / _subtype
+/ _then / _to / _transport / _type 
+/ _unaffected / _units / _until / _use
+/ _variable
+/ _wait / _when / _while / _with 
+/ _xnor / _xor
+
 # ------------------------------------------------------------------------
 # Character set : Section 15.2
 upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ]
@@ -407,7 +428,7 @@ name
 / label ( lrpar generate_specification rrpar )?
 
 # Section 11.2
-block_statement <- 
+block_statement <-
 # /block_/label colon
 label colon
 # _block ( lrpar /guard_/condition rrpar )? ( _is )?
@@ -450,7 +471,7 @@ case_statement_alternative
 _end _case ( '?' )? ( label )? semicolon
 
 # Section 10.9
-case_statement_alternative <- 
+case_statement_alternative <-
 _when choices arrow
 sequence_of_statements
 
@@ -460,7 +481,7 @@ sequence_of_statements
 character_literal <- < "'" < graphic_character > "'" >
 
 # Section 9.3.3.1
-choice <- 
+choice <-
 _others
 / simple_expression
 # / /discrete_/range
@@ -859,7 +880,7 @@ external_variable_name <-
 double_less _variable external_pathname colon subtype_indication double_grtr
 
 # Section 8.7
-external_pathname <- 
+external_pathname <-
 package_pathname
 / absolute_pathname
 / relative_pathname
@@ -930,7 +951,7 @@ _type identifier _is type_definition semicolon
 # Section 9.3.4
 function_call <-
 # /function_/name ( lrpar actual_parameter_part rrpar )?
-identifier lrpar ( actual_parameter_part )? rrpar 
+identifier lrpar ( actual_parameter_part )? rrpar
 
 # Section 4.2.1
 function_specification <-
@@ -1233,7 +1254,7 @@ multiplying_operator <- mult / div / _mod / _rem
 # Break the left-recusrion by re-defining these
 
 name <-
-name_prefix ( name_part )*
+!keyword name_prefix ( name_part )*
 / external_name
 
 name_prefix <- identifier / string_literal
@@ -1252,7 +1273,7 @@ function_call_element <- attribute_name / simple_expression
 
 indexed_name_part <- lrpar expression ( comma expression )* rrpar
 
-slice_name_part <- lrpar discrete_range rrpar 
+slice_name_part <- lrpar discrete_range rrpar
 
 attribute_name_part <-
 ( signature )? quot_s attribute_designator ( lrpar expression rrpar )?
@@ -1410,7 +1431,7 @@ port_map_aspect <-
 _port _map lrpar association_list rrpar
 
 # Section 8.1
-# Note: 'prefix' causes left-recursion in the 'name' rule, so 
+# Note: 'prefix' causes left-recursion in the 'name' rule, so
 #         it has been replaced with 'identifier'.
 #       This may need to be revisited if 'function_call' is needed.
 #prefix <-
@@ -1528,7 +1549,7 @@ protected_type_body_declarative_part <-
 
 # Section 5.6.2
 protected_type_declaration <-
-_protected 
+_protected
 protected_type_declarative_part
 # _end _protected ( /protected_type_/simple_name )?
 _end _protected ( simple_name )?
@@ -1550,7 +1571,7 @@ protected_type_declaration
 / protected_type_body
 
 # Section 9.3.5
-qualified_expression <- 
+qualified_expression <-
 type_mark quot_s lrpar expression rrpar
 / type_mark quot_s aggregate
 
@@ -1639,7 +1660,7 @@ target assignment _force ( force_mode )? selected_expressions semicolon
 selected_name <- ( identifier dot )+ suffix
 
 # Section 10.5.4
-selected_signal_assignment <- 
+selected_signal_assignment <-
 selected_waveform_assignment / selected_force_assignment
 
 # Section 10.6.4
@@ -1686,7 +1707,7 @@ wait_statement
 
 # Section 9.1
 shift_expression <-
-simple_expression ( shift_operator simple_expression )? 
+simple_expression ( shift_operator simple_expression )?
 
 # Section 9.2.1
 shift_operator <- _sll / _srl / _sla / _sra / _rol / _ror
@@ -1745,15 +1766,15 @@ simple_waveform_assignment
 
 # Section 10.5.2.1
 simple_waveform_assignment <-
-target assignment ( delay_mechanism )? waveform semicolon 
+target assignment ( delay_mechanism )? waveform semicolon
 
 # Section 10.6.2.1
 simple_variable_assignment <-
-target var_assignment expression semicolon 
+target var_assignment expression semicolon
 
 # Section 8.5
 # Currently unused due to changes to 'name' rule
-#slice_name <- identifier lrpar discrete_range rrpar 
+#slice_name <- identifier lrpar discrete_range rrpar
 
 # Section 15.7
 #string_literal <- quot_d ( quot_d quot_d / graphic_character )* quot_d
@@ -1765,7 +1786,7 @@ subprogram_specification _is
 subprogram_declarative_part
 _begin
 subprogram_statement_part
-_end ( subprogram_kind )? ( designator )? semicolon 
+_end ( subprogram_kind )? ( designator )? semicolon
 
 # Section 4.2.1
 subprogram_declaration <-
@@ -1793,7 +1814,7 @@ subprogram_declaration
 
 # Section 4.3
 subprogram_declarative_part <-
-( subprogram_declarative_item )* 
+( subprogram_declarative_item )*
 
 # Section 4.2.1
 subprogram_header <-
@@ -1839,7 +1860,7 @@ name
 / aggregate
 
 # Section 9.1
-term <- 
+term <-
 factor ( multiplying_operator factor )*
 
 # Section 10.2
