@@ -1419,7 +1419,8 @@ _port _map lrpar association_list rrpar
 
 # Section 9.1
 primary <-
-function_call
+attribute_name
+/ function_call
 / literal
 / aggregate
 / qualified_expression
@@ -1556,8 +1557,8 @@ type_mark quot_s lrpar expression rrpar
 # Section 5.2.1
 range <-
 # /range_/attribute_name
-attribute_name
-/ simple_expression direction simple_expression
+simple_expression direction simple_expression
+/ attribute_name
 
 # Section 5.2.1
 range_constraint <- _range range
