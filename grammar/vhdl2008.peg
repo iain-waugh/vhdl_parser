@@ -550,13 +550,13 @@ block_statement
 # / PSL_PSL_Directive # TODO
 
 # Section 10.2
-condition <- expression
+condition <- lrpar expression rrpar / expression
 
 # Section 10.2
 condition_clause <- _until condition
 
 # Section 9.2.1
-# condition_operator   <-   ?? # Defined in the top section
+# condition_operator   <-   ?? # Defined above, in the top section
 
 # Section 10.5.3
 conditional_expressions <-
@@ -1419,9 +1419,9 @@ _port _map lrpar association_list rrpar
 
 # Section 9.1
 primary <-
-literal
+function_call
+/ literal
 / aggregate
-/ function_call
 / qualified_expression
 / type_conversion
 / allocator
