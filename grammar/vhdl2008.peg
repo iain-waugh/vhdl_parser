@@ -137,9 +137,9 @@ _vunit        <- 'vunit'i     # VHDL-2008 only
 # Character set : Section 15.2
 upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ]
 lower_case_letter <- [a-z] / [àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ]
-special_character <- backslash / [\'#&\'()*+,-./:;<=>?@\[\]_`|]
-other_special_character <- [$%\\^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
-format_effector <- '\t' / '\r' / '/n' / 
+special_character <- space / quot_d quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
+other_special_character <- backslash backslash / [$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
+format_effector <- space / '\t' / '\r' / '/n'
 digit <- [0-9]
 
 # ------------------------------------------------------------------------
@@ -155,7 +155,7 @@ quot_s    <- "'"
 quot_d    <- '"'
 backslash <- "\\"
 hash      <- "#"
-#space     <- " "
+space     <- " "
 dot       <- "."
 plus      <- "+"
 comma     <- ","
@@ -329,7 +329,7 @@ basic_graphic_character / format_effector
 
 # Section 15.2
 basic_graphic_character <-
-upper_case_letter / digit / special_character / space_character
+special_character / upper_case_letter / digit / space_character
 
 # Section 15.4.2
 basic_identifier <- < letter ( ( underline )? letter_or_digit )* >
@@ -451,7 +451,9 @@ _when choices arrow
 sequence_of_statements
 
 # Section 15.6
-character_literal <- quot_s graphic_character quot_s
+# PEG parser notes: need to locally disable whitespace using the '< >' tokenisers
+# https://github.com/yhirose/cpp-peglib/issues/44
+character_literal <- < "'" < graphic_character > "'" >
 
 # Section 9.3.3.1
 choice <- 
@@ -924,7 +926,7 @@ _type identifier _is type_definition semicolon
 # Section 9.3.4
 function_call <-
 # /function_/name ( lrpar actual_parameter_part rrpar )?
-identifier ( lrpar actual_parameter_part rrpar )?
+identifier lrpar ( actual_parameter_part )? rrpar 
 
 # Section 4.2.1
 function_specification <-
@@ -993,7 +995,7 @@ guarded_signal_specification <-
 signal_list colon type_mark
 
 # Section 15.4.1
-identifier <- basic_identifier / extended_identifier
+identifier <- extended_identifier / basic_identifier
 
 # Section 5.3.3
 identifier_list <- identifier ( comma identifier )*
@@ -1169,8 +1171,8 @@ primary_unit
 
 # Section 9.3.2
 literal <-
-bit_string_literal
-/ string_literal
+string_literal
+/ bit_string_literal
 / enumeration_literal
 / numeric_literal
 / _null
@@ -1411,9 +1413,9 @@ _port _map lrpar association_list rrpar
 
 # Section 9.1
 primary <-
-function_call
-/ literal
+literal
 / aggregate
+/ function_call
 / qualified_expression
 / type_conversion
 / allocator
@@ -1747,7 +1749,8 @@ target var_assignment expression semicolon
 slice_name <- identifier lrpar discrete_range rrpar 
 
 # Section 15.7
-string_literal <- quot_d ( graphic_character )* quot_d
+#string_literal <- quot_d ( quot_d quot_d / graphic_character )* quot_d
+string_literal <-  < ["] < (quot_d quot_d / !["] .)* > ["] >
 
 # Section 4.3
 subprogram_body <-
