@@ -119,18 +119,20 @@ _xnor         <- 'xnor'i
 _xor          <- 'xor'i
 
 # PSL reserved keywords
-_assume       <- 'assume'i !underline    # VHDL-2008 only
-_assume_guarantee <- 'assume_guarantee'i # VHDL-2008 only
-_cover        <- 'cover'i     # VHDL-2008 only
+# TODO: Unused keywords are commented out
+#         Find out what they're for
+#_assume       <- 'assume'i !underline    # VHDL-2008 only
+#_assume_guarantee <- 'assume_guarantee'i # VHDL-2008 only
+#_cover        <- 'cover'i     # VHDL-2008 only
 _default      <- 'default'i   # VHDL-2008 only
-_fairness     <- 'fairness'i  # VHDL-2008 only
+#_fairness     <- 'fairness'i  # VHDL-2008 only
 _property     <- 'property'i  # VHDL-2008 only
-_restrict     <- 'restrict'i !underline      # VHDL-2008 only
-_restrict_guarantee <- 'restrict_guarantee'i # VHDL-2008 only
+#_restrict     <- 'restrict'i !underline      # VHDL-2008 only
+#_restrict_guarantee <- 'restrict_guarantee'i # VHDL-2008 only
 _sequence     <- "sequence"i  # VHDL-2008 only
-_strong       <- 'strong'i    # VHDL-2008 only
-_vmode        <- 'vmode'i     # VHDL-2008 only
-_vprop        <- 'vprop'i     # VHDL-2008 only
+#_strong       <- 'strong'i    # VHDL-2008 only
+#_vmode        <- 'vmode'i     # VHDL-2008 only
+#_vprop        <- 'vprop'i     # VHDL-2008 only
 _vunit        <- 'vunit'i     # VHDL-2008 only
 
 # ------------------------------------------------------------------------
@@ -139,8 +141,10 @@ upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙ
 lower_case_letter <- [a-z] / [àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ]
 special_character <- space / quot_d quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
 other_special_character <- backslash backslash / [$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
-format_effector <- space / '\t' / '\r' / '/n'
 digit <- [0-9]
+
+# 'format_effector' is unused because of %whitespace rule.
+# format_effector <- space / '\t' / '\r' / '/n'
 
 # ------------------------------------------------------------------------
 # Lexical elements, separators, and delimiters : Section 15.3
@@ -150,7 +154,7 @@ colon     <- ":"
 semicolon <- ";"
 lrpar     <- "("
 rrpar     <- ")"
-backtick  <- '`'
+#backtick  <- '`'
 quot_s    <- "'"
 quot_d    <- '"'
 backslash <- "\\"
@@ -168,7 +172,6 @@ less_than <- "<"
 grtr_than <- ">"
 bar       <- "|"
 
-delimiter <- [&\'()*+,-./:;<=>`|\[\]?@]
 underline <- "_"
 space_character <- " "
 
@@ -324,8 +327,9 @@ based_literal <-
 base hash based_integer ( dot based_integer )? hash ( exponent )?
 
 # Section 15.2
-basic_character <-
-basic_graphic_character / format_effector
+# TODO: Currently unused - find out what it's for
+#basic_character <-
+#basic_graphic_character / format_effector
 
 # Section 15.2
 basic_graphic_character <-
@@ -1043,7 +1047,7 @@ index_subtype_definition <- type_mark _range box
 
 # Section 8.4
 # Currently unused due to changes to 'name' rule
-indexed_name <- identifier lrpar expression ( comma expression )* rrpar
+#indexed_name <- identifier lrpar expression ( comma expression )* rrpar
 
 # Section 11.7.1
 instantiated_unit <-
@@ -1201,7 +1205,8 @@ sequence_of_statements
 _end _loop ( label )? semicolon
 
 # Section 9.2.1
-miscellaneous_operator <- exponential / _abs / _not
+# TODO: Currently unused - find out what it's for
+#miscellaneous_operator <- exponential / _abs / _not
 
 # Section 6.5.2
 mode <- _inout / _in / _out / _inout / _buffer / _linkage
@@ -1266,11 +1271,12 @@ abstract_literal
 / physical_literal
 
 # Section 6.4.2.1
-object_declaration <-
-constant_declaration
-/ signal_declaration
-/ variable_declaration
-/ file_declaration
+# TODO: Not used - see what it's used for
+#object_declaration <-
+#constant_declaration
+#/ signal_declaration
+#/ variable_declaration
+#/ file_declaration
 
 # Section 4.2.1
 operator_symbol <- string_literal
@@ -1746,7 +1752,7 @@ target var_assignment expression semicolon
 
 # Section 8.5
 # Currently unused due to changes to 'name' rule
-slice_name <- identifier lrpar discrete_range rrpar 
+#slice_name <- identifier lrpar discrete_range rrpar 
 
 # Section 15.7
 #string_literal <- quot_d ( quot_d quot_d / graphic_character )* quot_d
@@ -1840,7 +1846,8 @@ factor ( multiplying_operator factor )*
 timeout_clause <- _for expression
 
 # Section 15.11
-tool_directive <- backtick identifier ( graphic_character )*
+# Currently unused: TODO - find where to add this in the grammar
+#tool_directive <- backtick identifier ( graphic_character )*
 
 # Section 9.3.6
 type_conversion <- type_mark lrpar expression rrpar
