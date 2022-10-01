@@ -19,7 +19,7 @@ begin
 
   o_led <= led;
 
---  d_led <= transport led after 20 ns;
+  d_led <= transport led after 20 ns;
 
   zero <= (others => '0');
 

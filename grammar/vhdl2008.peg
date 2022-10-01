@@ -1267,8 +1267,8 @@ null_statement <- ( label colon )? _null semicolon
 
 # Section 9.3.2
 numeric_literal <-
-abstract_literal
-/ physical_literal
+physical_literal
+/ abstract_literal
 
 # Section 6.4.2.1
 # TODO: Not used - see what it's used for
