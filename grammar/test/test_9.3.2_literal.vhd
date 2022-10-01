@@ -3,8 +3,12 @@
 -- Copyright (c) 2022 Iain Waugh
 -- All rights reserved.
 --
--- Test VHDL-2008 'literal' (Section 9.3.2)
--- Non-functional code to test the PEG
+-- Non-functional VHDL code to test the PEG
+--
+-- Test VHDL-2008 'literal'
+--   Covers:
+--     Section 9.3.2
+--     Section 15.4.1
 --
 -------------------------------------------------------------------------------
 
