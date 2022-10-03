@@ -164,7 +164,7 @@ special_character <- space / quot_d quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
 other_special_character <- backslash backslash / [$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
 digit <- [0-9]
 
-delimiter <- upper_case_letter / lower_case_letter / digit
+delimiter <- !( upper_case_letter / lower_case_letter / digit / '_' )
 
 # 'format_effector' is unused because of %whitespace rule.
 # format_effector <- space / '\t' / '\r' / '/n'
@@ -1275,7 +1275,7 @@ function_call_element <- attribute_name / simple_expression
 
 indexed_name_part <- lrpar expression ( comma expression )* rrpar
 
-slice_name_part <- lrpar discrete_range rrpar
+slice_name_part <- lrpar discrete_range rrpar / range
 
 attribute_name_part <-
 ( signature )? quot_s attribute_designator ( lrpar expression rrpar )?
@@ -1408,7 +1408,7 @@ simple_name
 
 # Section 5.2.4.1
 # physical_literal <- ( abstract_literal )? /unit_/name
-physical_literal <- ( abstract_literal )? name
+physical_literal <- ( abstract_literal )? ( !keyword name )
 
 # Section 5.2.4.1
 physical_type_definition <-

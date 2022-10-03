@@ -53,6 +53,7 @@ begin
   sig33 <= X1;
   sig34 <= c_out;
   sig35 <= STORE_NEXT_ITEM;
+  sig36 <= intra; -- Clash with 'in' keyword?
 
 -- extended_identifier
   sig41 <= \BUS\;
