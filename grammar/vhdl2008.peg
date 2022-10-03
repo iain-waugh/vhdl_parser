@@ -164,6 +164,8 @@ special_character <- space / quot_d quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
 other_special_character <- backslash backslash / [$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
 digit <- [0-9]
 
+delimiter <- upper_case_letter / lower_case_letter / digit
+
 # 'format_effector' is unused because of %whitespace rule.
 # format_effector <- space / '\t' / '\r' / '/n'
 
@@ -1020,7 +1022,7 @@ guarded_signal_specification <-
 signal_list colon type_mark
 
 # Section 15.4.1
-identifier <- extended_identifier / basic_identifier
+identifier <- extended_identifier / !( keyword delimiter ) basic_identifier
 
 # Section 5.3.3
 identifier_list <- identifier ( comma identifier )*
@@ -1254,7 +1256,7 @@ multiplying_operator <- mult / div / _mod / _rem
 # Break the left-recusrion by re-defining these
 
 name <-
-!keyword name_prefix ( name_part )*
+name_prefix ( name_part )*
 / external_name
 
 name_prefix <- identifier / string_literal

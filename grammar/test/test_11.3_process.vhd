@@ -23,8 +23,6 @@ begin
     if (rising_edge(pixel_clk)) then
       if (frame_sync_local = '1') then
         pixel_red   <= (others => '0');
-        pixel_green <= (others => '0');
-        pixel_blue  <= (others => '0');
       else
         if (pixel_in_ready = '1') then
           pixel_red <= pixel_red + 1;
