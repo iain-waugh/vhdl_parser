@@ -8,6 +8,7 @@
 -- Test VHDL-2008
 --   Covers:
 --     Section 10.5 - signal assignment
+--     Section 9.1  - expression
 --
 -------------------------------------------------------------------------------
 
@@ -22,11 +23,12 @@ begin
   sig12 <= transport led after 20 ns;
 
   sig13 <= (others => '0');
---  sig14 <= my_array(0, 2 downto 0);
+  sig14 <= my_array(0);
+  sig15 <= std_logic_vector(unsigned(a) + unsigned(b));
 
-  sig15 <= guarded my_func(param);
+  sig16 <= guarded my_func(param);
 
-  sig16(led'high -1 downto 6) <= (1 => '1', others => '0');
-  sig17(led'low to led'high)  <= (1 => '1', 2 => 'X', others => '0');
+  sig17(led'high -1 downto 6) <= (1 => '1', others => '0');
+  sig18(led'low to led'high)  <= (1 => '1', 2 => 'X', others => '0');
 
 end test;

@@ -231,14 +231,14 @@ access_type_definition <- _access subtype_indication
 
 # Section 6.5.7.1
 actual_designator <-
-name
-/ ( _inertial )? expression
+( _inertial )? expression
 # / signal_name # /signal_/name
 # / variable_name # /variable_/name
 # / file_name # /file_/name
 / subtype_indication
 # / subprogram_name # /subprogram_/name
 # / instantiated_package_name # /instantiated_package_/name
+/ name
 / _open
 
 # Section 9.3.4
@@ -247,10 +247,10 @@ actual_parameter_part <- association_list
 
 # Section 6.5.7.1
 actual_part <-
-actual_designator
-/ name lrpar actual_designator rrpar
+name lrpar actual_designator rrpar
+/ type_mark lrpar actual_designator rrpar
+/ actual_designator
 # / /function_/name lrpar actual_designator rrpar
-# / type_mark lrpar actual_designator rrpar
 
 # Section 9.2
 adding_operator <- plus / minus / concat
@@ -889,9 +889,9 @@ package_pathname
 
 # Section 9.1
 factor <-
-primary ( exponential primary )?
-/ _abs primary
+_abs primary
 / _not primary
+/ primary ( exponential primary )?
 / logical_operator primary
 
 # Section 6.4.2.5
@@ -941,10 +941,10 @@ formal_parameter_list <- interface_list
 
 # Section 6.5.7.1
 formal_part <-
-formal_designator
 # / /function_/name lrpar formal_designator rrpar
-/ name lrpar formal_designator rrpar
+name lrpar formal_designator rrpar
 / type_mark lrpar formal_designator rrpar
+/ formal_designator
 
 # Section 6.2
 full_type_declaration <-
