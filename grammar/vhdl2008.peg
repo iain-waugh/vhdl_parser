@@ -1444,13 +1444,13 @@ _port _map lrpar association_list rrpar
 primary <-
 attribute_name
 / function_call
-/ literal
 / aggregate
 / qualified_expression
 / type_conversion
 / allocator
 / lrpar expression rrpar
-/ name
+/ name !quot_d
+/ literal
 
 # Section 13.1
 primary_unit <-

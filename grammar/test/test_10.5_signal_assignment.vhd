@@ -23,12 +23,13 @@ begin
   sig12 <= transport led after 20 ns;
 
   sig13 <= (others => '0');
-  sig14 <= my_array(0);
-  sig15 <= std_logic_vector(unsigned(a) + unsigned(b));
+  sig14 <= my_array(7 downto 0);
+  sig15 <= my_array(0 to 4);
+  sig16 <= std_logic_vector(signed(a) + signed(b));
 
-  sig16 <= guarded my_func(param);
+  sig17 <= guarded my_func(param);
 
-  sig17(led'high -1 downto 6) <= (1 => '1', others => '0');
-  sig18(led'low to led'high)  <= (1 => '1', 2 => 'X', others => '0');
+  sig18(led'high -1 downto 6) <= (1 => '1', others => '0');
+  sig19(led'low to led'high)  <= (1 => '1', 2 => 'X', others => '0');
 
 end test;
