@@ -19,6 +19,7 @@ architecture test of vhdl_process is
 begin
 
   process (pixel_clk)
+    variable result : UNSIGNED (A'range);
   begin
     if (rising_edge(pixel_clk)) then
       if (frame_sync_local = '1') then

@@ -1022,7 +1022,7 @@ guarded_signal_specification <-
 signal_list colon type_mark
 
 # Section 15.4.1
-identifier <- extended_identifier / !( keyword delimiter ) basic_identifier
+identifier <- extended_identifier / basic_identifier
 
 # Section 5.3.3
 identifier_list <- identifier ( comma identifier )*
@@ -1256,7 +1256,7 @@ multiplying_operator <- mult / div / _mod / _rem
 # Break the left-recusrion by re-defining these
 
 name <-
-name_prefix ( name_part )*
+!( keyword delimiter ) name_prefix ( name_part )*
 / external_name
 
 name_prefix <- identifier / string_literal
@@ -1846,8 +1846,8 @@ _subtype identifier _is subtype_indication semicolon
 
 # Section 6.3
 subtype_indication <-
-# ( resolution_indication )? type_mark ( constraint )?
-name ( constraint )?
+( resolution_indication type_mark / type_mark ) ( constraint )?
+# name ( constraint )?
 
 # Section 8.3
 suffix <-
