@@ -1614,7 +1614,7 @@ relation <- shift_expression ( relational_operator shift_expression )?
 
 # Section 9.2.1
 matching_operator <- matching_equality / matching_inequality / matching_less_than / matching_less_or_equal / matching_grtr_than / matching_grtr_or_equal
-relational_operator <- equal / not_equal / less_than / less_or_equal / grtr_than / grtr_or_equal / matching_operator
+relational_operator <- not_equal / less_or_equal / less_than / grtr_or_equal / grtr_than / matching_operator / equal
 
 # Section 8.7
 relative_pathname <- ( '^' dot )* partial_pathname
