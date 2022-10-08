@@ -1906,9 +1906,9 @@ _use selected_name ( comma selected_name )* semicolon
 
 # Section 10.6.1
 variable_assignment_statement <-
-( label colon )? simple_variable_assignment
-/ ( label colon )? conditional_variable_assignment
-/ ( label colon )? selected_variable_assignment
+( label colon !equal )? simple_variable_assignment
+/ ( label colon !equal )? conditional_variable_assignment
+/ ( label colon !equal )? selected_variable_assignment
 
 # Section 6.4.2.4
 variable_declaration <-

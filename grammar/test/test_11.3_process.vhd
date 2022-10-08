@@ -22,6 +22,8 @@ begin
     variable result : UNSIGNED (A'range);
   begin
     if (rising_edge(pixel_clk)) then
+      result := (others => 'X');
+
       if (frame_sync_local = '1') then
         pixel_red   <= (others => '0');
       else
