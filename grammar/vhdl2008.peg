@@ -1,4 +1,7 @@
 # VHDL-2008 grammar based on IEEE 1076-12008
+# Standard note: 
+#  { } means 0 or more times
+#  [ ] means 1 or more times
 vhdl2008 <-  Spacing? design_file EndOfFile
 Spacing <- (Space / Comment)*
 Space <- ' ' / '\t' / EndOfLine
@@ -160,8 +163,8 @@ keyword <- _abs / _access / _after / _alias / _all / _and / _architecture / _arr
 # Character set : Section 15.2
 upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ]
 lower_case_letter <- [a-z] / [àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ]
-special_character <- space / quot_d quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
-other_special_character <- backslash backslash / [$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
+special_character <- space / quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
+other_special_character <- backslash backslash / [!$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
 digit <- [0-9]
 
 delimiter <- !( upper_case_letter / lower_case_letter / digit / '_' )
@@ -326,7 +329,8 @@ _attribute identifier colon type_mark semicolon
 
 # Section 8.6
 # attribute_designator <- /attribute_/simple_name
-attribute_designator <- simple_name
+# Bypass using 'simple_name' because simple name fails on the 'range' keyword
+attribute_designator <- extended_identifier / basic_identifier
 
 # Section 8.6
 attribute_name <-
@@ -368,10 +372,13 @@ binding_indication <-
 ( port_map_aspect )?
 
 # Section 15.8
-bit_string_literal <- ( integer )? base_specifier quot_d ( bit_value )? quot_d
+bit_string_literal <- ( integer )? base_specifier quot_d ( bit_value ) quot_d
 
 # Section 15.8
-bit_value <- graphic_character ( ( underline )? graphic_character )*
+# Deviate from the spec because bit strings don't have the more unusual characters that are in a graphic_character
+# Technically, it should just be '0-9a-fA-FuUxXzZwWlLhH-', but that's a handful...
+#bit_value <- graphic_character ( ( underline )? graphic_character )*
+bit_value <- ( [0-9a-zA-Z] / minus ) ( ( underline )? ( [0-9a-zA-Z] / minus ) )*
 
 # Section 3.4.2
 block_configuration <-
@@ -1659,7 +1666,7 @@ _with expression _select ( '?' )?
 target assignment _force ( force_mode )? selected_expressions semicolon
 
 # Section 8.3
-selected_name <- ( identifier dot )+ suffix
+selected_name <- identifier ( dot suffix )*
 
 # Section 10.5.4
 selected_signal_assignment <-
@@ -1846,8 +1853,8 @@ _subtype identifier _is subtype_indication semicolon
 
 # Section 6.3
 subtype_indication <-
-( resolution_indication type_mark / type_mark ) ( constraint )?
-# name ( constraint )?
+# ( resolution_indication type_mark / type_mark ) ( constraint )?
+selected_name ( name )? ( constraint )?
 
 # Section 8.3
 suffix <-
