@@ -18,125 +18,125 @@ Comment_2008 <- "/*" (!"*/" .)* "*/"
 
 # ------------------------------------------------------------------------
 # Reserved words : Section 15.10
-_abs          <- 'abs'i
-_access       <- 'access'i
-_after        <- 'after'i
-_alias        <- 'alias'i
-_all          <- 'all'i
-_and          <- 'and'i
-_architecture <- 'architecture'i
-_array        <- 'array'i
-_assert       <- 'assert'i  # Part of PSL now, but listed here because it's always been in VHDL
-_attribute    <- 'attribute'i
-_begin        <- 'begin'i
-_block        <- 'block'i
-_body         <- 'body'i
-_buffer       <- 'buffer'i
-_bus          <- 'bus'i
-_case         <- 'case'i
-_component    <- 'component'i
-_configuration <- 'configuration'i
-_constant     <- 'constant'i
-_context      <- 'context'i # VHDL-2008 only
-_disconnect   <- 'disconnect'i
-_downto       <- 'downto'i
-_else         <- 'else'i
-_elsif        <- 'elsif'i
-_end          <- 'end'i
-_entity       <- 'entity'i
-_exit         <- 'exit'i
-_file         <- 'file'i
-_for          <- 'for'i
-_force        <- 'force'i  # VHDL-2008 only
-_function     <- 'function'i
-_generate     <- 'generate'i
-_generic      <- 'generic'i
-_group        <- 'group'i
-_guarded      <- 'guarded'i
-_if           <- 'if'i
-_impure       <- 'impure'i
-_in           <- 'in'i
-_inertial     <- 'inertial'i
-_inout        <- 'inout'i
-_is           <- 'is'i
-_label        <- 'label'i
-_library      <- 'library'i
-_linkage      <- 'linkage'i
-_literal      <- 'literal'i
-_loop         <- 'loop'i
-_map          <- 'map'i
-_mod          <- 'mod'i
-_nand         <- 'nand'i
-_new          <- 'new'i
-_next         <- 'next'i
-_nor          <- 'nor'i
-_not          <- 'not'i
-_null         <- 'null'i
-_of           <- 'of'i
-_on           <- 'on'i
-_open         <- 'open'i
-_or           <- 'or'i
-_others       <- 'others'i
-_out          <- 'out'i
-_package      <- 'package'i
-_parameter    <- 'parameter'i  # VHDL-2008 only
-_port         <- 'port'i
-_postponed    <- 'postponed'i
-_procedure    <- 'procedure'i
-_process      <- 'process'i
-_protected    <- 'protected'i  # VHDL-2008 only
-_pure         <- 'pure'i
-_range        <- 'range'i
-_record       <- 'record'i
-_register     <- 'register'i
-_reject       <- 'reject'i
-_release      <- 'release'i  # VHDL-2008 only
-_rem          <- 'rem'i
-_report       <- 'report'i
-_return       <- 'return'i
-_rol          <- 'rol'i
-_ror          <- 'ror'i
-_select       <- 'select'i
-_severity     <- 'severity'i
-_signal       <- 'signal'i
-_shared       <- 'shared'i
-_sla          <- 'sla'i
-_sll          <- 'sll'i
-_sra          <- 'sra'i
-_srl          <- 'srl'i
-_subtype      <- 'subtype'i
-_then         <- 'then'i
-_to           <- 'to'i
-_transport    <- 'transport'i
-_type         <- 'type'i
-_unaffected   <- 'unaffected'i
-_units        <- 'units'i
-_until        <- 'until'i
-_use          <- 'use'i
-_variable     <- 'variable'i
-_wait         <- 'wait'i
-_when         <- 'when'i
-_while        <- 'while'i
-_with         <- 'with'i
-_xnor         <- 'xnor'i
-_xor          <- 'xor'i
+_abs          <- < 'abs'i delimiter >
+_access       <- < 'access'i delimiter >
+_after        <- < 'after'i delimiter >
+_alias        <- < 'alias'i delimiter >
+_all          <- < 'all'i delimiter >
+_and          <- < 'and'i delimiter >
+_architecture <- < 'architecture'i delimiter >
+_array        <- < 'array'i delimiter >
+_assert       <- < 'assert'i delimiter >  # Part of PSL now, but listed here because it's always been in VHDL
+_attribute    <- < 'attribute'i delimiter >
+_begin        <- < 'begin'i delimiter >
+_block        <- < 'block'i delimiter >
+_body         <- < 'body'i delimiter >
+_buffer       <- < 'buffer'i delimiter >
+_bus          <- < 'bus'i delimiter >
+_case         <- < 'case'i delimiter >
+_component    <- < 'component'i delimiter >
+_configuration <- < 'configuration'i delimiter >
+_constant     <- < 'constant'i delimiter >
+_context      <- < 'context'i  delimiter ># VHDL-2008 only
+_disconnect   <- < 'disconnect'i delimiter >
+_downto       <- < 'downto'i delimiter >
+_else         <- < 'else'i delimiter >
+_elsif        <- < 'elsif'i delimiter >
+_end          <- < 'end'i delimiter >
+_entity       <- < 'entity'i delimiter >
+_exit         <- < 'exit'i delimiter >
+_file         <- < 'file'i delimiter >
+_for          <- < 'for'i delimiter >
+_force        <- < 'force'i  delimiter > # VHDL-2008 only
+_function     <- < 'function'i delimiter >
+_generate     <- < 'generate'i delimiter >
+_generic      <- < 'generic'i delimiter >
+_group        <- < 'group'i delimiter >
+_guarded      <- < 'guarded'i delimiter >
+_if           <- < 'if'i delimiter >
+_impure       <- < 'impure'i delimiter >
+_in           <- < 'in'i delimiter >
+_inertial     <- < 'inertial'i delimiter >
+_inout        <- < 'inout'i delimiter >
+_is           <- < 'is'i delimiter >
+_label        <- < 'label'i delimiter >
+_library      <- < 'library'i delimiter >
+_linkage      <- < 'linkage'i delimiter >
+_literal      <- < 'literal'i delimiter >
+_loop         <- < 'loop'i delimiter >
+_map          <- < 'map'i delimiter >
+_mod          <- < 'mod'i delimiter >
+_nand         <- < 'nand'i delimiter >
+_new          <- < 'new'i delimiter >
+_next         <- < 'next'i delimiter >
+_nor          <- < 'nor'i delimiter >
+_not          <- < 'not'i delimiter >
+_null         <- < 'null'i delimiter >
+_of           <- < 'of'i delimiter >
+_on           <- < 'on'i delimiter >
+_open         <- < 'open'i delimiter >
+_or           <- < 'or'i delimiter >
+_others       <- < 'others'i delimiter >
+_out          <- < 'out'i delimiter >
+_package      <- < 'package'i delimiter >
+_parameter    <- < 'parameter'i delimiter >  # VHDL-2008 only
+_port         <- < 'port'i delimiter >
+_postponed    <- < 'postponed'i delimiter >
+_procedure    <- < 'procedure'i delimiter >
+_process      <- < 'process'i delimiter >
+_protected    <- < 'protected'i delimiter >  # VHDL-2008 only
+_pure         <- < 'pure'i delimiter >
+_range        <- < 'range'i delimiter >
+_record       <- < 'record'i delimiter >
+_register     <- < 'register'i delimiter >
+_reject       <- < 'reject'i delimiter >
+_release      <- < 'release'i delimiter >  # VHDL-2008 only
+_rem          <- < 'rem'i delimiter >
+_report       <- < 'report'i delimiter >
+_return       <- < 'return'i delimiter >
+_rol          <- < 'rol'i delimiter >
+_ror          <- < 'ror'i delimiter >
+_select       <- < 'select'i delimiter >
+_severity     <- < 'severity'i delimiter >
+_signal       <- < 'signal'i delimiter >
+_shared       <- < 'shared'i delimiter >
+_sla          <- < 'sla'i delimiter >
+_sll          <- < 'sll'i delimiter >
+_sra          <- < 'sra'i delimiter >
+_srl          <- < 'srl'i delimiter >
+_subtype      <- < 'subtype'i delimiter >
+_then         <- < 'then'i delimiter >
+_to           <- < 'to'i delimiter >
+_transport    <- < 'transport'i delimiter >
+_type         <- < 'type'i delimiter >
+_unaffected   <- < 'unaffected'i delimiter >
+_units        <- < 'units'i delimiter >
+_until        <- < 'until'i delimiter >
+_use          <- < 'use'i delimiter >
+_variable     <- < 'variable'i delimiter >
+_wait         <- < 'wait'i delimiter >
+_when         <- < 'when'i delimiter >
+_while        <- < 'while'i delimiter >
+_with         <- < 'with'i delimiter >
+_xnor         <- < 'xnor'i delimiter >
+_xor          <- < 'xor'i delimiter >
 
 # PSL reserved keywords
 # TODO: Unused keywords are commented out
 #         Find out what they're for
-#_assume       <- 'assume'i !underline    # VHDL-2008 only
-#_assume_guarantee <- 'assume_guarantee'i # VHDL-2008 only
-#_cover        <- 'cover'i     # VHDL-2008 only
-_default      <- 'default'i   # VHDL-2008 only
-#_fairness     <- 'fairness'i  # VHDL-2008 only
-_property     <- 'property'i  # VHDL-2008 only
-#_restrict     <- 'restrict'i !underline      # VHDL-2008 only
-#_restrict_guarantee <- 'restrict_guarantee'i # VHDL-2008 only
-_sequence     <- "sequence"i  # VHDL-2008 only
-#_strong       <- 'strong'i    # VHDL-2008 only
-#_vmode        <- 'vmode'i     # VHDL-2008 only
-#_vprop        <- 'vprop'i     # VHDL-2008 only
-_vunit        <- 'vunit'i     # VHDL-2008 only
+#_assume       <- 'assume'i delimiter >    # VHDL-2008 only
+#_assume_guarantee <- 'assume_guarantee'i delimiter > # VHDL-2008 only
+#_cover        <- < 'cover'i delimiter >     # VHDL-2008 only
+_default      <- < 'default'i delimiter >   # VHDL-2008 only
+#_fairness     <- < 'fairness'i delimiter >  # VHDL-2008 only
+_property     <- < 'property'i delimiter >  # VHDL-2008 only
+#_restrict     <- 'restrict'i delimiter >      # VHDL-2008 only
+#_restrict_guarantee <- 'restrict_guarantee'i delimiter > # VHDL-2008 only
+_sequence     <- < 'sequence'i delimiter >  # VHDL-2008 only
+#_strong       <- < 'strong'i delimiter >    # VHDL-2008 only
+#_vmode        <- < 'vmode'i delimiter >     # VHDL-2008 only
+#_vprop        <- < 'vprop'i delimiter >     # VHDL-2008 only
+_vunit        <- < 'vunit'i delimiter >     # VHDL-2008 only
 
 keyword <- _abs / _access / _after / _alias / _all / _and / _architecture / _array / _assert / _attribute
 / _begin / _block / _body / _buffer / _bus
@@ -330,7 +330,7 @@ _attribute identifier colon type_mark semicolon
 # Section 8.6
 # attribute_designator <- /attribute_/simple_name
 # Bypass using 'simple_name' because simple name fails on the 'range' keyword
-attribute_designator <- extended_identifier / basic_identifier
+attribute_designator <- extended_identifier / basic_identifier_or_attribute
 
 # Section 8.6
 attribute_name <-
@@ -363,7 +363,10 @@ basic_graphic_character <-
 special_character / upper_case_letter / digit / space_character
 
 # Section 15.4.2
-basic_identifier <- < letter ( ( underline )? letter_or_digit )* >
+basic_identifier <- !keyword < letter ( ( underline )? letter_or_digit )* >
+
+# Custom basic identifier for attributes
+basic_identifier_or_attribute <- < letter ( ( underline )? letter_or_digit )* >
 
 # Section 7.3.2.1
 binding_indication <-
@@ -1263,7 +1266,7 @@ multiplying_operator <- mult / div / _mod / _rem
 # Break the left-recusrion by re-defining these
 
 name <-
-!( keyword delimiter ) name_prefix ( name_part )*
+!keyword name_prefix ( name_part )*
 / external_name
 
 name_prefix <- identifier / string_literal
@@ -1415,7 +1418,7 @@ simple_name
 
 # Section 5.2.4.1
 # physical_literal <- ( abstract_literal )? /unit_/name
-physical_literal <- ( abstract_literal )? ( !keyword name )
+physical_literal <- ( abstract_literal )? name
 
 # Section 5.2.4.1
 physical_type_definition <-
@@ -1854,7 +1857,7 @@ _subtype identifier _is subtype_indication semicolon
 # Section 6.3
 subtype_indication <-
 # ( resolution_indication type_mark / type_mark ) ( constraint )?
-selected_name ( name )? ( constraint )?
+( name / selected_name ) ( constraint )?
 
 # Section 8.3
 suffix <-
