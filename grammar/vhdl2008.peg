@@ -1856,7 +1856,7 @@ _subtype identifier _is subtype_indication semicolon
 # Section 6.3
 subtype_indication <-
 # ( resolution_indication type_mark / type_mark ) ( constraint )?
-( name / selected_name ) ( constraint )?
+name + ( constraint )?
 
 # Section 8.3
 suffix <-

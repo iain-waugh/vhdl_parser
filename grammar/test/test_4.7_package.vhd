@@ -21,6 +21,7 @@ package test_package is
   type signed is array (natural range <>) of std_logic;
   subtype SMALL_INT is integer range 0 to 1;
   function ADD_UNSIGNED (L, R: UNSIGNED; C: STD_LOGIC) return UNSIGNED;
+  SUBTYPE my_std_logic IS resolved std_ulogic;
 
   ----------------
   -- add operators
