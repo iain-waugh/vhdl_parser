@@ -4,6 +4,8 @@
 
 This project aims to provide an open-source parser for VHDL 2008, staying as close to IEEE Std 1076-2008 as I could get without having left recursion in the grammar (I'm looking at you, `prefix`).
 
+It is currently a work-in-progress, where the PEG definition file has been the focus of attention.
+
 It is released under the MIT license.
 
 
@@ -26,4 +28,4 @@ This parser would not be possible without Y Hirose's [cpp-peglib.h](https://gith
 
 Build the [cpp-peglib.h](https://github.com/yhirose/cpp-peglib) project and copy `lint/peglint` into the `grammar` folder of this project.
 
-Run tests with: `./peglint vhdl2008.peg tests/<test_name.vhd>`
+Run individual tests with: `./peglint vhdl2008.peg --packrat tests/<test_name.vhd>`
