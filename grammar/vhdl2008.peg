@@ -583,7 +583,7 @@ block_statement
 # / PSL_PSL_Directive # TODO
 
 # Section 10.2
-condition <- lrpar expression rrpar / expression
+condition <- expression
 
 # Section 10.2
 condition_clause <- _until condition
@@ -1216,8 +1216,7 @@ string_literal
 
 # Section 9.1
 logical_expression <-
-relation ( ( _and / _or / _xor / _xnor) relation )*
-/ relation ( ( _nand / _nor )relation )?
+relation ( logical_operator relation )*
 
 # Section 13.2
 logical_name <- identifier
@@ -1453,13 +1452,13 @@ _port _map lrpar association_list rrpar
 # Section 9.1
 primary <-
 attribute_name
+/ name !quot_d
 / function_call
 / aggregate
 / qualified_expression
 / type_conversion
 / allocator
 / lrpar expression rrpar
-/ name !quot_d
 / literal
 
 # Section 13.1
@@ -1757,7 +1756,7 @@ _for component_specification binding_indication semicolon
 
 # Section 9.1
 simple_expression <-
-( sign )? term ( _? adding_operator _? term )*
+( sign )? term ( adding_operator term )*
 
 # Section 10.5.2.1
 simple_force_assignment <-
@@ -1916,9 +1915,9 @@ _use selected_name ( comma selected_name )* semicolon
 
 # Section 10.6.1
 variable_assignment_statement <-
-( label colon !equal )? simple_variable_assignment
-/ ( label colon !equal )? conditional_variable_assignment
-/ ( label colon !equal )? selected_variable_assignment
+( label !var_assignment colon )? simple_variable_assignment
+/ ( label !var_assignment colon )? conditional_variable_assignment
+/ ( label !var_assignment colon )? selected_variable_assignment
 
 # Section 6.4.2.4
 variable_declaration <-

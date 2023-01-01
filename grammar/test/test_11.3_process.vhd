@@ -20,6 +20,7 @@ begin
 
   process (pixel_clk)
     variable result : UNSIGNED (A'range);
+    variable L01 : UNSIGNED(SIZE-1 downto 0);
   begin
     if (rising_edge(pixel_clk)) then
       result := (others => 'X');
