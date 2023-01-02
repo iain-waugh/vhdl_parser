@@ -344,7 +344,7 @@ _attribute attribute_designator _of entity_specification _is expression semicolo
 base <- integer
 
 # Section 15.8
-base_specifier <- 'B' / 'O' / 'X' / 'UB' / 'UO' / 'UX' / 'SB' / 'SO' / 'SX' / 'D'
+base_specifier <- 'B'i / 'O'i / 'X'i / 'UB'i / 'UO'i / 'UX'i / 'SB'i / 'SO'i / 'SX'i / 'D'i
 
 # Section 15.5.3
 based_integer <- < extended_digit ( ( underline )? extended_digit )* >
