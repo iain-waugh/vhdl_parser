@@ -1452,10 +1452,10 @@ _port _map lrpar association_list rrpar
 # Section 9.1
 primary <-
 attribute_name
+/ qualified_expression
 / name !quot_d
 / function_call
 / aggregate
-/ qualified_expression
 / type_conversion
 / allocator
 / lrpar expression rrpar

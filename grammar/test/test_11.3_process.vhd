@@ -24,6 +24,7 @@ begin
   begin
     if (rising_edge(pixel_clk)) then
       result := (others => 'X');
+      result := L01'(others => 'X');
 
       if (frame_sync_local >= 1) then
         pixel_red   <= (others => '0');
