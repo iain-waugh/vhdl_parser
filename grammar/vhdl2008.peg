@@ -490,7 +490,7 @@ sequence_of_statements
 # Section 15.6
 # PEG parser notes: need to locally disable whitespace using the '< >' tokenisers
 # https://github.com/yhirose/cpp-peglib/issues/44
-character_literal <- < "'" < graphic_character > "'" >
+character_literal <- < "'" < graphic_character / backslash > "'" >
 
 # Section 9.3.3.1
 choice <-
@@ -1644,10 +1644,10 @@ return_statement <-
 
 # Section 5.2.1
 scalar_type_definition <-
-enumeration_type_definition
+physical_type_definition
+/ enumeration_type_definition
 / integer_type_definition
 / floating_type_definition
-/ physical_type_definition
 
 # Section 13.1
 secondary_unit <-
@@ -1892,11 +1892,11 @@ full_type_declaration
 
 # Section 6.2
 type_definition <-
-scalar_type_definition
+protected_type_definition
+/ scalar_type_definition
 / composite_type_definition
 / access_type_definition
 / file_type_definition
-/ protected_type_definition
 
 # Section 6.3
 type_mark <- name

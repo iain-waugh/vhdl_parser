@@ -65,6 +65,7 @@ begin
   sig52 <= '*';
   sig53 <= ''';
   sig54 <= ' ';
+  sig55 <= '\';
 
 -- string_literal
   sig61 <= "Setup time is too short";   -- An error message.
