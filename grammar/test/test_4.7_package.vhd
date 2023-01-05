@@ -40,10 +40,13 @@ package body test_package is
     variable CBIT: STD_LOGIC := C;
   begin
     RESULT := UNSIGNED(STD_LOGIC_VECTOR(L) nand STD_LOGIC_VECTOR(R));
-    RESULT(I) := CBIT xor XL(I) xor XR(I);    
+    RESULT(I) := CBIT xor XL(I) xor XR(I);  
+    case RESULT is
+      when x"0" => XL(i+1) := '0';
+    end case;
     for I in 0 to RESULT'LEFT loop
       if (L_LEFT mod 2) = 0 then
-        RESULT(I) := '0';
+        RESULT(I + 1) := '0';
       else
         RESULT(I) := not '1';
       end if;
