@@ -6,7 +6,7 @@ using namespace std;
 #include <filesystem>
 namespace fs = std::filesystem;
 
-#include <peglib.h>
+#include "peglib.h"
 using namespace peg;
 
 void parse_vhdl_2008(fs::path file_path) {
@@ -14,6 +14,9 @@ void parse_vhdl_2008(fs::path file_path) {
   parser parser(R"(
 
 # VHDL-2008 grammar based on IEEE 1076-12008
+# Standard note:
+#  { } means 0 or more times
+#  [ ] means 1 or more times
 vhdl2008 <-  Spacing? design_file EndOfFile
 Spacing <- (Space / Comment)*
 Space <- ' ' / '\t' / EndOfLine
@@ -30,132 +33,159 @@ Comment_2008 <- "/*" (!"*/" .)* "*/"
 
 # ------------------------------------------------------------------------
 # Reserved words : Section 15.10
-_abs          <- 'abs'i
-_access       <- 'access'i
-_after        <- 'after'i
-_alias        <- 'alias'i
-_all          <- 'all'i
-_and          <- 'and'i
-_architecture <- 'architecture'i
-_array        <- 'array'i
-_assert       <- 'assert'i  # Part of PSL now, but listed here because it's always been in VHDL
-_attribute    <- 'attribute'i
-_begin        <- 'begin'i
-_block        <- 'block'i
-_body         <- 'body'i
-_buffer       <- 'buffer'i
-_bus          <- 'bus'i
-_case         <- 'case'i
-_component    <- 'component'i
-_configuration <- 'configuration'i
-_constant     <- 'constant'i
-_context      <- 'context'i # VHDL-2008 only
-_disconnect   <- 'disconnect'i
-_downto       <- 'downto'i
-_else         <- 'else'i
-_elsif        <- 'elsif'i
-_end          <- 'end'i
-_entity       <- 'entity'i
-_exit         <- 'exit'i
-_file         <- 'file'i
-_for          <- 'for'i
-_force        <- 'force'i  # VHDL-2008 only
-_function     <- 'function'i
-_generate     <- 'generate'i
-_generic      <- 'generic'i
-_group        <- 'group'i
-_guarded      <- 'guarded'i
-_if           <- 'if'i
-_impure       <- 'impure'i
-_in           <- 'in'i
-_inertial     <- 'inertial'i
-_inout        <- 'inout'i
-_is           <- 'is'i
-_label        <- 'label'i
-_library      <- 'library'i
-_linkage      <- 'linkage'i
-_literal      <- 'literal'i
-_loop         <- 'loop'i
-_map          <- 'map'i
-_mod          <- 'mod'i
-_nand         <- 'nand'i
-_new          <- 'new'i
-_next         <- 'next'i
-_nor          <- 'nor'i
-_not          <- 'not'i
-_null         <- 'null'i
-_of           <- 'of'i
-_on           <- 'on'i
-_open         <- 'open'i
-_or           <- 'or'i
-_others       <- 'others'i
-_out          <- 'out'i
-_package      <- 'package'i
-_parameter    <- 'parameter'i  # VHDL-2008 only
-_port         <- 'port'i
-_postponed    <- 'postponed'i
-_procedure    <- 'procedure'i
-_process      <- 'process'i
-_protected    <- 'protected'i  # VHDL-2008 only
-_pure         <- 'pure'i
-_range        <- 'range'i
-_record       <- 'record'i
-_register     <- 'register'i
-_reject       <- 'reject'i
-_release      <- 'release'i  # VHDL-2008 only
-_rem          <- 'rem'i
-_report       <- 'report'i
-_return       <- 'return'i
-_rol          <- 'rol'i
-_ror          <- 'ror'i
-_select       <- 'select'i
-_severity     <- 'severity'i
-_signal       <- 'signal'i
-_shared       <- 'shared'i
-_sla          <- 'sla'i
-_sll          <- 'sll'i
-_sra          <- 'sra'i
-_srl          <- 'srl'i
-_subtype      <- 'subtype'i
-_then         <- 'then'i
-_to           <- 'to'i
-_transport    <- 'transport'i
-_type         <- 'type'i
-_unaffected   <- 'unaffected'i
-_units        <- 'units'i
-_until        <- 'until'i
-_use          <- 'use'i
-_variable     <- 'variable'i
-_wait         <- 'wait'i
-_when         <- 'when'i
-_while        <- 'while'i
-_with         <- 'with'i
-_xnor         <- 'xnor'i
-_xor          <- 'xor'i
+_abs          <- < 'abs'i delimiter >
+_access       <- < 'access'i delimiter >
+_after        <- < 'after'i delimiter >
+_alias        <- < 'alias'i delimiter >
+_all          <- < 'all'i delimiter >
+_and          <- < 'and'i delimiter >
+_architecture <- < 'architecture'i delimiter >
+_array        <- < 'array'i delimiter >
+_assert       <- < 'assert'i delimiter >  # Part of PSL now, but listed here because it's always been in VHDL
+_attribute    <- < 'attribute'i delimiter >
+_begin        <- < 'begin'i delimiter >
+_block        <- < 'block'i delimiter >
+_body         <- < 'body'i delimiter >
+_buffer       <- < 'buffer'i delimiter >
+_bus          <- < 'bus'i delimiter >
+_case         <- < 'case'i delimiter >
+_component    <- < 'component'i delimiter >
+_configuration <- < 'configuration'i delimiter >
+_constant     <- < 'constant'i delimiter >
+_context      <- < 'context'i  delimiter ># VHDL-2008 only
+_disconnect   <- < 'disconnect'i delimiter >
+_downto       <- < 'downto'i delimiter >
+_else         <- < 'else'i delimiter >
+_elsif        <- < 'elsif'i delimiter >
+_end          <- < 'end'i delimiter >
+_entity       <- < 'entity'i delimiter >
+_exit         <- < 'exit'i delimiter >
+_file         <- < 'file'i delimiter >
+_for          <- < 'for'i delimiter >
+_force        <- < 'force'i  delimiter > # VHDL-2008 only
+_function     <- < 'function'i delimiter >
+_generate     <- < 'generate'i delimiter >
+_generic      <- < 'generic'i delimiter >
+_group        <- < 'group'i delimiter >
+_guarded      <- < 'guarded'i delimiter >
+_if           <- < 'if'i delimiter >
+_impure       <- < 'impure'i delimiter >
+_in           <- < 'in'i delimiter >
+_inertial     <- < 'inertial'i delimiter >
+_inout        <- < 'inout'i delimiter >
+_is           <- < 'is'i delimiter >
+_label        <- < 'label'i delimiter >
+_library      <- < 'library'i delimiter >
+_linkage      <- < 'linkage'i delimiter >
+_literal      <- < 'literal'i delimiter >
+_loop         <- < 'loop'i delimiter >
+_map          <- < 'map'i delimiter >
+_mod          <- < 'mod'i delimiter >
+_nand         <- < 'nand'i delimiter >
+_new          <- < 'new'i delimiter >
+_next         <- < 'next'i delimiter >
+_nor          <- < 'nor'i delimiter >
+_not          <- < 'not'i delimiter >
+_null         <- < 'null'i delimiter >
+_of           <- < 'of'i delimiter >
+_on           <- < 'on'i delimiter >
+_open         <- < 'open'i delimiter >
+_or           <- < 'or'i delimiter >
+_others       <- < 'others'i delimiter >
+_out          <- < 'out'i delimiter >
+_package      <- < 'package'i delimiter >
+_parameter    <- < 'parameter'i delimiter >  # VHDL-2008 only
+_port         <- < 'port'i delimiter >
+_postponed    <- < 'postponed'i delimiter >
+_procedure    <- < 'procedure'i delimiter >
+_process      <- < 'process'i delimiter >
+_protected    <- < 'protected'i delimiter >  # VHDL-2008 only
+_pure         <- < 'pure'i delimiter >
+_range        <- < 'range'i delimiter >
+_record       <- < 'record'i delimiter >
+_register     <- < 'register'i delimiter >
+_reject       <- < 'reject'i delimiter >
+_release      <- < 'release'i delimiter >  # VHDL-2008 only
+_rem          <- < 'rem'i delimiter >
+_report       <- < 'report'i delimiter >
+_return       <- < 'return'i delimiter >
+_rol          <- < 'rol'i delimiter >
+_ror          <- < 'ror'i delimiter >
+_select       <- < 'select'i delimiter >
+_severity     <- < 'severity'i delimiter >
+_signal       <- < 'signal'i delimiter >
+_shared       <- < 'shared'i delimiter >
+_sla          <- < 'sla'i delimiter >
+_sll          <- < 'sll'i delimiter >
+_sra          <- < 'sra'i delimiter >
+_srl          <- < 'srl'i delimiter >
+_subtype      <- < 'subtype'i delimiter >
+_then         <- < 'then'i delimiter >
+_to           <- < 'to'i delimiter >
+_transport    <- < 'transport'i delimiter >
+_type         <- < 'type'i delimiter >
+_unaffected   <- < 'unaffected'i delimiter >
+_units        <- < 'units'i delimiter >
+_until        <- < 'until'i delimiter >
+_use          <- < 'use'i delimiter >
+_variable     <- < 'variable'i delimiter >
+_wait         <- < 'wait'i delimiter >
+_when         <- < 'when'i delimiter >
+_while        <- < 'while'i delimiter >
+_with         <- < 'with'i delimiter >
+_xnor         <- < 'xnor'i delimiter >
+_xor          <- < 'xor'i delimiter >
 
 # PSL reserved keywords
-_assume       <- 'assume'i !underline    # VHDL-2008 only
-_assume_guarantee <- 'assume_guarantee'i # VHDL-2008 only
-_cover        <- 'cover'i     # VHDL-2008 only
-_default      <- 'default'i   # VHDL-2008 only
-_fairness     <- 'fairness'i  # VHDL-2008 only
-_property     <- 'property'i  # VHDL-2008 only
-_restrict     <- 'restrict'i !underline      # VHDL-2008 only
-_restrict_guarantee <- 'restrict_guarantee'i # VHDL-2008 only
-_sequence     <- "sequence"i  # VHDL-2008 only
-_strong       <- 'strong'i    # VHDL-2008 only
-_vmode        <- 'vmode'i     # VHDL-2008 only
-_vprop        <- 'vprop'i     # VHDL-2008 only
-_vunit        <- 'vunit'i     # VHDL-2008 only
+# TODO: Unused keywords are commented out
+#         Find out what they're for
+#_assume       <- 'assume'i delimiter >    # VHDL-2008 only
+#_assume_guarantee <- 'assume_guarantee'i delimiter > # VHDL-2008 only
+#_cover        <- < 'cover'i delimiter >     # VHDL-2008 only
+_default      <- < 'default'i delimiter >   # VHDL-2008 only
+#_fairness     <- < 'fairness'i delimiter >  # VHDL-2008 only
+_property     <- < 'property'i delimiter >  # VHDL-2008 only
+#_restrict     <- 'restrict'i delimiter >      # VHDL-2008 only
+#_restrict_guarantee <- 'restrict_guarantee'i delimiter > # VHDL-2008 only
+_sequence     <- < 'sequence'i delimiter >  # VHDL-2008 only
+#_strong       <- < 'strong'i delimiter >    # VHDL-2008 only
+#_vmode        <- < 'vmode'i delimiter >     # VHDL-2008 only
+#_vprop        <- < 'vprop'i delimiter >     # VHDL-2008 only
+_vunit        <- < 'vunit'i delimiter >     # VHDL-2008 only
+
+keyword <- _abs / _access / _after / _alias / _all / _and / _architecture / _array / _assert / _attribute
+/ _begin / _block / _body / _buffer / _bus
+/ _case / _component / _configuration / _constant / _context
+/ _disconnect / _downto
+/ _else / _elsif / _end / _entity / _exit
+/ _file / _for / _force / _function
+/ _generate / _generic / _group / _guarded
+/ _if / _impure / _in / _inertial / _inout / _is
+/ _label / _library / _linkage / _literal / _loop
+/ _map / _mod
+/ _nand / _new / _next / _nor / _not / _null
+/ _of / _on / _open / _or / _others / _out
+/ _package / _parameter / _port / _postponed / _procedure / _process / _protected / _pure
+/ _range / _record / _register / _reject / _release / _rem / _report / _return / _rol / _ror
+/ _select / _severity / _signal / _shared / _sla / _sll / _sra / _srl / _subtype
+/ _then / _to / _transport / _type
+/ _unaffected / _units / _until / _use
+/ _variable
+/ _wait / _when / _while / _with
+/ _xnor / _xor
 
 # ------------------------------------------------------------------------
 # Character set : Section 15.2
 upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ]
 lower_case_letter <- [a-z] / [àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ]
-special_character <- backslash / [\'#&\'()*+,-./:;<=>?@\[\]_`|]
-other_special_character <- [$%\\^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
-format_effector <- '\t' / '\r' / '/n' /
+special_character <- space / quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
+other_special_character <- backslash backslash / [!$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
 digit <- [0-9]
+
+delimiter <- !( upper_case_letter / lower_case_letter / digit / '_' )
+
+# 'format_effector' is unused because of %whitespace rule.
+# format_effector <- space / '\t' / '\r' / '/n'
 
 # ------------------------------------------------------------------------
 # Lexical elements, separators, and delimiters : Section 15.3
@@ -163,14 +193,14 @@ digit <- [0-9]
 # Delimiters
 colon     <- ":"
 semicolon <- ";"
-lrpar     <- '('
+lrpar     <- "("
 rrpar     <- ')'
-backtick  <- '`'
+#backtick  <- '`'
 quot_s    <- "'"
 quot_d    <- '"'
 backslash <- "\\"
 hash      <- "#"
-#space     <- " "
+space     <- " "
 dot       <- "."
 plus      <- "+"
 comma     <- ","
@@ -183,7 +213,6 @@ less_than <- "<"
 grtr_than <- ">"
 bar       <- "|"
 
-delimiter <- [&\'()*+,-./:;<=>`|\[\]?@]
 underline <- "_"
 space_character <- " "
 
@@ -213,21 +242,21 @@ double_grtr            <- ">>"   # VHDL-2008 only
 absolute_pathname <- dot partial_pathname
 
 # Section 15.5.1
-abstract_literal <- decimal_literal / based_literal
+abstract_literal <- based_literal / decimal_literal
 
 # Section 5.4.1
 access_type_definition <- _access subtype_indication
 
 # Section 6.5.7.1
 actual_designator <-
-name
-/ ( _inertial )? expression
+( _inertial )? expression
 # / signal_name # /signal_/name
 # / variable_name # /variable_/name
 # / file_name # /file_/name
 / subtype_indication
 # / subprogram_name # /subprogram_/name
 # / instantiated_package_name # /instantiated_package_/name
+/ name
 / _open
 
 # Section 9.3.4
@@ -236,10 +265,10 @@ actual_parameter_part <- association_list
 
 # Section 6.5.7.1
 actual_part <-
-actual_designator
-/ name lrpar actual_designator rrpar
+name lrpar actual_designator rrpar
+/ type_mark lrpar actual_designator rrpar
+/ actual_designator
 # / /function_/name lrpar actual_designator rrpar
-# / type_mark lrpar actual_designator rrpar
 
 # Section 9.2
 adding_operator <- plus / minus / concat
@@ -315,7 +344,8 @@ _attribute identifier colon type_mark semicolon
 
 # Section 8.6
 # attribute_designator <- /attribute_/simple_name
-attribute_designator <- simple_name
+# Bypass using 'simple_name' because simple name fails on the 'range' keyword
+attribute_designator <- extended_identifier / basic_identifier_or_attribute
 
 # Section 8.6
 attribute_name <-
@@ -329,25 +359,29 @@ _attribute attribute_designator _of entity_specification _is expression semicolo
 base <- integer
 
 # Section 15.8
-base_specifier <- 'B' / 'O' / 'X' / 'UB' / 'UO' / 'UX' / 'SB' / 'SO' / 'SX' / 'D'
+base_specifier <- 'B'i / 'O'i / 'X'i / 'UB'i / 'UO'i / 'UX'i / 'SB'i / 'SO'i / 'SX'i / 'D'i
 
 # Section 15.5.3
-based_integer <- extended_digit ( ( underline )? extended_digit )*
+based_integer <- < extended_digit ( ( underline )? extended_digit )* >
 
 # Section 15.5.3
 based_literal <-
 base hash based_integer ( dot based_integer )? hash ( exponent )?
 
 # Section 15.2
-basic_character <-
-basic_graphic_character / format_effector
+# TODO: Currently unused - find out what it's for
+#basic_character <-
+#basic_graphic_character / format_effector
 
 # Section 15.2
 basic_graphic_character <-
-upper_case_letter / digit / special_character / space_character
+special_character / upper_case_letter / digit / space_character
 
 # Section 15.4.2
-basic_identifier <- < letter ( ( underline )? letter_or_digit )* >
+basic_identifier <- !keyword < letter ( ( underline )? letter_or_digit )* >
+
+# Custom basic identifier for attributes
+basic_identifier_or_attribute <- < letter ( ( underline )? letter_or_digit )* >
 
 # Section 7.3.2.1
 binding_indication <-
@@ -356,10 +390,13 @@ binding_indication <-
 ( port_map_aspect )?
 
 # Section 15.8
-bit_string_literal <- ( integer )? base_specifier quot_d ( bit_value )? quot_d
+bit_string_literal <- ( integer )? base_specifier quot_d ( bit_value ) quot_d
 
 # Section 15.8
-bit_value <- graphic_character ( ( underline )? graphic_character )*
+# Deviate from the spec because bit strings don't have the more unusual characters that are in a graphic_character
+# Technically, it should just be '0-9a-fA-FuUxXzZwWlLhH-', but that's a handful...
+#bit_value <- graphic_character ( ( underline )? graphic_character )*
+bit_value <- ( [0-9a-zA-Z] / minus ) ( ( underline )? ( [0-9a-zA-Z] / minus ) )*
 
 # Section 3.4.2
 block_configuration <-
@@ -466,7 +503,9 @@ _when choices arrow
 sequence_of_statements
 
 # Section 15.6
-character_literal <- quot_s graphic_character quot_s
+# PEG parser notes: need to locally disable whitespace using the '< >' tokenisers
+# https://github.com/yhirose/cpp-peglib/issues/44
+character_literal <- < "'" < graphic_character / backslash > "'" >
 
 # Section 9.3.3.1
 choice <-
@@ -565,7 +604,7 @@ condition <- expression
 condition_clause <- _until condition
 
 # Section 9.2.1
-# condition_operator   <-   ?? # Defined in the top section
+# condition_operator   <-   ?? # Defined above, in the top section
 
 # Section 10.5.3
 conditional_expressions <-
@@ -875,9 +914,9 @@ package_pathname
 
 # Section 9.1
 factor <-
-primary ( exponential primary )?
-/ _abs primary
+_abs primary
 / _not primary
+/ primary ( exponential primary )?
 / logical_operator primary
 
 # Section 6.4.2.5
@@ -927,10 +966,10 @@ formal_parameter_list <- interface_list
 
 # Section 6.5.7.1
 formal_part <-
-formal_designator
 # / /function_/name lrpar formal_designator rrpar
-/ name lrpar formal_designator rrpar
+name lrpar formal_designator rrpar
 / type_mark lrpar formal_designator rrpar
+/ formal_designator
 
 # Section 6.2
 full_type_declaration <-
@@ -939,7 +978,7 @@ _type identifier _is type_definition semicolon
 # Section 9.3.4
 function_call <-
 # /function_/name ( lrpar actual_parameter_part rrpar )?
-identifier ( lrpar actual_parameter_part rrpar )?
+identifier lrpar ( actual_parameter_part )? rrpar
 
 # Section 4.2.1
 function_specification <-
@@ -1008,7 +1047,7 @@ guarded_signal_specification <-
 signal_list colon type_mark
 
 # Section 15.4.1
-identifier <- basic_identifier / extended_identifier
+identifier <- extended_identifier / basic_identifier
 
 # Section 5.3.3
 identifier_list <- identifier ( comma identifier )*
@@ -1056,7 +1095,7 @@ index_subtype_definition <- type_mark _range box
 
 # Section 8.4
 # Currently unused due to changes to 'name' rule
-indexed_name <- identifier lrpar expression ( comma expression )* rrpar
+#indexed_name <- identifier lrpar expression ( comma expression )* rrpar
 
 # Section 11.7.1
 instantiated_unit <-
@@ -1184,16 +1223,15 @@ primary_unit
 
 # Section 9.3.2
 literal <-
-bit_string_literal
-/ string_literal
+string_literal
+/ bit_string_literal
 / enumeration_literal
 / numeric_literal
 / _null
 
 # Section 9.1
 logical_expression <-
-relation ( ( _and / _or / _xor / _xnor) relation )*
-/ relation ( ( _nand / _nor )relation )?
+relation ( logical_operator relation )*
 
 # Section 13.2
 logical_name <- identifier
@@ -1214,7 +1252,8 @@ sequence_of_statements
 _end _loop ( label )? semicolon
 
 # Section 9.2.1
-miscellaneous_operator <- exponential / _abs / _not
+# TODO: Currently unused - find out what it's for
+#miscellaneous_operator <- exponential / _abs / _not
 
 # Section 6.5.2
 mode <- _inout / _in / _out / _inout / _buffer / _linkage
@@ -1241,7 +1280,7 @@ multiplying_operator <- mult / div / _mod / _rem
 # Break the left-recusrion by re-defining these
 
 name <-
-name_prefix ( name_part )*
+!keyword name_prefix ( name_part )*
 / external_name
 
 name_prefix <- identifier / string_literal
@@ -1260,7 +1299,7 @@ function_call_element <- attribute_name / simple_expression
 
 indexed_name_part <- lrpar expression ( comma expression )* rrpar
 
-slice_name_part <- lrpar discrete_range rrpar
+slice_name_part <- lrpar discrete_range rrpar / range
 
 attribute_name_part <-
 ( signature )? quot_s attribute_designator ( lrpar expression rrpar )?
@@ -1275,15 +1314,16 @@ null_statement <- ( label colon )? _null semicolon
 
 # Section 9.3.2
 numeric_literal <-
-abstract_literal
-/ physical_literal
+physical_literal
+/ abstract_literal
 
 # Section 6.4.2.1
-object_declaration <-
-constant_declaration
-/ signal_declaration
-/ variable_declaration
-/ file_declaration
+# TODO: Not used - see what it's used for
+#object_declaration <-
+#constant_declaration
+#/ signal_declaration
+#/ variable_declaration
+#/ file_declaration
 
 # Section 4.2.1
 operator_symbol <- string_literal
@@ -1426,14 +1466,15 @@ _port _map lrpar association_list rrpar
 
 # Section 9.1
 primary <-
-function_call
-/ literal
-/ aggregate
+attribute_name
 / qualified_expression
+/ name !quot_d
+/ function_call
+/ aggregate
 / type_conversion
 / allocator
 / lrpar expression rrpar
-/ name
+/ literal
 
 # Section 13.1
 primary_unit <-
@@ -1563,8 +1604,8 @@ type_mark quot_s lrpar expression rrpar
 # Section 5.2.1
 range <-
 # /range_/attribute_name
-attribute_name
-/ simple_expression direction simple_expression
+simple_expression direction simple_expression
+/ attribute_name
 
 # Section 5.2.1
 range_constraint <- _range range
@@ -1597,7 +1638,7 @@ relation <- shift_expression ( relational_operator shift_expression )?
 
 # Section 9.2.1
 matching_operator <- matching_equality / matching_inequality / matching_less_than / matching_less_or_equal / matching_grtr_than / matching_grtr_or_equal
-relational_operator <- equal / not_equal / less_than / less_or_equal / grtr_than / grtr_or_equal / matching_operator
+relational_operator <- not_equal / less_or_equal / less_than / grtr_or_equal / grtr_than / matching_operator / equal
 
 # Section 8.7
 relative_pathname <- ( '^' dot )* partial_pathname
@@ -1618,10 +1659,10 @@ return_statement <-
 
 # Section 5.2.1
 scalar_type_definition <-
-enumeration_type_definition
+physical_type_definition
+/ enumeration_type_definition
 / integer_type_definition
 / floating_type_definition
-/ physical_type_definition
 
 # Section 13.1
 secondary_unit <-
@@ -1642,7 +1683,7 @@ _with expression _select ( '?' )?
 target assignment _force ( force_mode )? selected_expressions semicolon
 
 # Section 8.3
-selected_name <- ( identifier dot )+ suffix
+selected_name <- identifier ( dot suffix )*
 
 # Section 10.5.4
 selected_signal_assignment <-
@@ -1730,7 +1771,7 @@ _for component_specification binding_indication semicolon
 
 # Section 9.1
 simple_expression <-
-( sign )? term ( _? adding_operator _? term )*
+( sign )? term ( adding_operator term )*
 
 # Section 10.5.2.1
 simple_force_assignment <-
@@ -1759,10 +1800,11 @@ target var_assignment expression semicolon
 
 # Section 8.5
 # Currently unused due to changes to 'name' rule
-slice_name <- identifier lrpar discrete_range rrpar
+#slice_name <- identifier lrpar discrete_range rrpar
 
 # Section 15.7
-string_literal <- quot_d ( graphic_character )* quot_d
+#string_literal <- quot_d ( quot_d quot_d / graphic_character )* quot_d
+string_literal <-  < ["] < (quot_d quot_d / !["] .)* > ["] >
 
 # Section 4.3
 subprogram_body <-
@@ -1828,8 +1870,8 @@ _subtype identifier _is subtype_indication semicolon
 
 # Section 6.3
 subtype_indication <-
-# ( resolution_indication )? type_mark ( constraint )?
-name ( constraint )?
+# ( resolution_indication type_mark / type_mark ) ( constraint )?
+name + ( constraint )?
 
 # Section 8.3
 suffix <-
@@ -1852,7 +1894,8 @@ factor ( multiplying_operator factor )*
 timeout_clause <- _for expression
 
 # Section 15.11
-tool_directive <- backtick identifier ( graphic_character )*
+# Currently unused: TODO - find where to add this in the grammar
+#tool_directive <- backtick identifier ( graphic_character )*
 
 # Section 9.3.6
 type_conversion <- type_mark lrpar expression rrpar
@@ -1864,11 +1907,11 @@ full_type_declaration
 
 # Section 6.2
 type_definition <-
-scalar_type_definition
+protected_type_definition
+/ scalar_type_definition
 / composite_type_definition
 / access_type_definition
 / file_type_definition
-/ protected_type_definition
 
 # Section 6.3
 type_mark <- name
@@ -1887,9 +1930,9 @@ _use selected_name ( comma selected_name )* semicolon
 
 # Section 10.6.1
 variable_assignment_statement <-
-( label colon )? simple_variable_assignment
-/ ( label colon )? conditional_variable_assignment
-/ ( label colon )? selected_variable_assignment
+( label !var_assignment colon )? simple_variable_assignment
+/ ( label !var_assignment colon )? conditional_variable_assignment
+/ ( label !var_assignment colon )? selected_variable_assignment
 
 # Section 6.4.2.4
 variable_declaration <-
@@ -1926,7 +1969,8 @@ expression ( _after expression )?
   // (3) Setup actions
 
   // (4) Parse
-  //parser.enable_packrat_parsing(); // Enable packrat parsing.
+  // Enable packrat parsing for performance; it's too slow otherwise
+  parser.enable_packrat_parsing();
 
   parser.parse(" -- Just a comment ");
 

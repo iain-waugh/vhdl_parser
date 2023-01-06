@@ -179,7 +179,7 @@ delimiter <- !( upper_case_letter / lower_case_letter / digit / '_' )
 colon     <- ":"
 semicolon <- ";"
 lrpar     <- "("
-rrpar     <- ")"
+rrpar     <- ')'
 #backtick  <- '`'
 quot_s    <- "'"
 quot_d    <- '"'
