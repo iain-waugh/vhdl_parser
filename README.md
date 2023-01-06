@@ -14,6 +14,14 @@ It is released under the MIT license.
 
 This project requires `cmake` and the Boost library (for '`program_options`') to build.
 
+Under MSys2, `pacboy find boost` to see which libraries are available and `pacman -S <package>` to install.
+
+**Example for 64-bit MinGW under MSys2:**
+
+`pacman -S mingw64/mingw-w64-x86_64-boost`
+
+**Building:**
+
 ```bash
 mkdir build && cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
