@@ -14,7 +14,11 @@ It is released under the MIT license.
 
 This project requires `cmake` and the Boost library (for '`program_options`') to build.
 
-TODO: Add build instructions.
+```bash
+mkdir build && cd build
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+make
+```
 
 
 
