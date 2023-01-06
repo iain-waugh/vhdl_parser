@@ -2013,9 +2013,9 @@ expression ( _after expression )?
   //  parser.set_verbose_trace(true);
 
   // Create a way to show error messages
-  parser.set_logger([](size_t line, size_t col, const string& msg, const string &rule) {
-    cerr << line << ":" << col << ": " << msg <<"\n";
-  });
+//  parser.set_logger([](size_t line, size_t col, const string& msg, const string &rule) {
+//    cerr << line << ":" << col << ": " << msg <<"\n";
+//  });
 
   // Enable packrat parsing for performance; it's too slow otherwise
   parser.enable_packrat_parsing();
