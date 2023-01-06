@@ -7,11 +7,24 @@ using namespace std;
 namespace fs = std::filesystem;
 
 #include "peglib.h"
-using namespace peg;
 
-void parse_vhdl_2008(fs::path file_path) {
-  // (2) Make a parser
-  parser parser(R"(
+inline bool read_file(const fs::path file_path, vector<char> &buffer) {
+  ifstream ifs(file_path, ios::in | ios::binary);
+  if (ifs.fail())
+  {
+      return false;
+  }
+
+  buffer.resize(static_cast<unsigned int>(ifs.seekg(0, ios::end).tellg()));
+  if (!buffer.empty()) {
+    ifs.seekg(0, ios::beg).read(&buffer[0], static_cast<streamsize>(buffer.size()));
+  }
+  return true;
+}
+
+int parse_vhdl_2008(fs::path hdl_file_path) {
+  // Make a parser using the peglib "parser" method
+  peg::parser parser(R"(
 
 # VHDL-2008 grammar based on IEEE 1076-12008
 # Standard note:
@@ -1964,14 +1977,32 @@ expression ( _after expression )?
 
   )");
 
-  parser.set_verbose_trace(true);
+  vector<char> file_contents;
+  if (!read_file(hdl_file_path, file_contents)) {
+    cerr << "can't open the file." << endl;
+    return -1;
+  }
 
-  // (3) Setup actions
+  //  parser.set_verbose_trace(true);
 
-  // (4) Parse
+  // Create a way to show error messages
+  parser.set_logger([](size_t line, size_t col, const string& msg, const string &rule) {
+    cerr << line << ":" << col << ": " << msg <<"\n";
+  });
+
   // Enable packrat parsing for performance; it's too slow otherwise
   parser.enable_packrat_parsing();
 
-  parser.parse(" -- Just a comment ");
+  parser.enable_ast();
+  std::shared_ptr<peg::Ast> ast;
 
+  // Parse
+  parser.parse_n(file_contents.data(), file_contents.size(), ast);
+
+  if (ast) {
+    //ast = parser.optimize_ast(ast, false);
+    std::cout << peg::ast_to_s(ast);
+  }
+
+  return 0;
 }

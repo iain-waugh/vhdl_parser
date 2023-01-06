@@ -37,7 +37,8 @@ namespace po = boost::program_options;
 
 int main(int argc, char* argv[])
 {
-    std::string fileName = "";
+    std::string hdl_file_name = "";
+//    std::string ast_file_name = "";
 
     // Set up the command-line options and parse them
     try {
@@ -45,6 +46,7 @@ int main(int argc, char* argv[])
         cliOpts.add_options()
         ("help,h", "produce help message")
         ("input-file,i", po::value< std::string >(), "input file")
+//        ("output-file,o", po::value< std::string >(), "AST output file")
         ;
 
         po::options_description cliOptions;
@@ -52,31 +54,35 @@ int main(int argc, char* argv[])
 
         po::positional_options_description posOptD;
         posOptD.add("input-file", -1);
+//        posOptD.add("output-file", -1);
 
         po::variables_map varMap;
         po::store(po::command_line_parser(argc, argv).options(cliOptions).positional(posOptD).run(), varMap);
         po::notify(varMap);
 
-        // respond to the "help" request first
+        // Respond to the "help" request first
         if (varMap.count("help")) {
             // Print the help messages
             std::cout << cliOpts << "\n";
-            // Exit the program
+            // Exit the program without doing anything more
             return 0;
         }
 
-        if (varMap.count("input-file"))
+        if (varMap.count("input-file") > 0)
         {
-            fileName = varMap["input-file"].as< std::string >();
+            hdl_file_name = varMap["input-file"].as< std::string >();
         }
         else
         {
             // Print the help messages
             std::cout << cliOpts << "\n";
-            // Exit the program
+            // Exit the program without doing anything more
             return 0;
         }
-
+//        if (varMap.count("output-file") > 0)
+//        {
+//            ast_file_name = varMap["output-file"].as< std::string >();
+//        }
     }
     catch(std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
@@ -89,25 +95,24 @@ int main(int argc, char* argv[])
 
     // Now do something with the command line information
 
-    fs::path file_path(fileName);  // avoid repeated path construction below
+    fs::path hdl_file_path(hdl_file_name);
+//    fs::path ast_file_path(ast_file_name);
 
-    if (exists(file_path))    // does path p actually exist?
+    if (exists(hdl_file_path))
     {
-        if (fs::is_regular_file(file_path))        // is <file_path> pointing to a regular file?
+        if (fs::is_regular_file(hdl_file_path))
+        {
             // Yes!
             // Pass it on to the parsing subroutine
-            parse(file_path);
-
-        else if (fs::is_directory(file_path))      // is path p a directory?
+            parse_vhdl_2008(hdl_file_path);
+        }
+        else
         {
-            std::cout << "Error: " << file_path << " is a directory; please specify a file.\n";
-            return 1;
-        } else {
-            std::cout << "Error: " << file_path << " exists, but is not a regular file or directory; please specify a file.\n";
+            std::cout << "Error: " << hdl_file_path << " exists, but is not a file; please specify a file.\n";
             return 1;
         }
     } else {
-        std::cout << "Error: " << file_path << " does not exist; please specify a file.\n";
+        std::cout << "Error: " << hdl_file_path << " does not exist; please specify a file.\n";
         return 1;
     }
 
