@@ -3,7 +3,9 @@
 //
 //  Cross platform VHDL parser
 //
-//  Copyright (C) 2022 Iain Waugh. All rights reserved.
+//  MIT License
+//
+//  Copyright (C) 2022-2023 Iain Waugh. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
