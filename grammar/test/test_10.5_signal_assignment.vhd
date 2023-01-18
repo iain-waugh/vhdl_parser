@@ -32,4 +32,6 @@ begin
   sig18(led'high -1 downto 6) <= (1 => '1', others => '0');
   sig19(led'low to led'high)  <= (1 => '1', 2 => 'X', others => '0');
 
+  sig1a <= null;
+  
 end test;
