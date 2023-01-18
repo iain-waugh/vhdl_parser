@@ -1644,7 +1644,7 @@ type_mark quot_s lrpar expression rrpar
 # Section 5.2.1
 range <-
 # /range_/attribute_name
-simple_expression direction simple_expression
+simple_expression ( direction simple_expression )?
 / attribute_name
 
 # Section 5.2.1
