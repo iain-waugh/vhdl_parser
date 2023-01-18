@@ -235,17 +235,11 @@ access_type_definition <- _access subtype_indication
 # Section 6.5.7.1
 actual_designator <-
 ( _inertial )? expression
-# / signal_name # /signal_/name
-# / variable_name # /variable_/name
-# / file_name # /file_/name
 / subtype_indication
-# / subprogram_name # /subprogram_/name
-# / instantiated_package_name # /instantiated_package_/name
 / name
 / _open
 
 # Section 9.3.4
-# actual_parameter_part <- /parameter_/association_list
 actual_parameter_part <- association_list
 
 # Section 6.5.7.1
@@ -253,7 +247,6 @@ actual_part <-
 name lrpar actual_designator rrpar
 / type_mark lrpar actual_designator rrpar
 / actual_designator
-# / /function_/name lrpar actual_designator rrpar
 
 # Section 9.2
 adding_operator <- plus / minus / concat
@@ -276,12 +269,10 @@ _new subtype_indication
 
 # Section 3.3.1
 architecture_body <-
-# _architecture identifier _of /entity_/name _is
 _architecture identifier _of name _is
 architecture_declarative_part
 _begin
 architecture_statement_part
-#_end ( _architecture )? ( /architecture_/simple_name )? semicolon
 _end ( _architecture )? ( simple_name )? semicolon
 
 # Section 3.3.2
@@ -328,7 +319,6 @@ attribute_declaration <-
 _attribute identifier colon type_mark semicolon
 
 # Section 8.6
-# attribute_designator <- /attribute_/simple_name
 # Bypass using 'simple_name' because simple name fails on the 'range' keyword
 attribute_designator <- extended_identifier / basic_identifier_or_attribute
 
@@ -380,7 +370,6 @@ bit_string_literal <- ( integer )? base_specifier quot_d ( bit_value ) quot_d
 # Section 15.8
 # Deviate from the spec because bit strings don't have the more unusual characters that are in a graphic_character
 # Technically, it should just be '0-9a-fA-FuUxXzZwWlLhH-', but that's a handful...
-#bit_value <- graphic_character ( ( underline )? graphic_character )*
 bit_value <- ( [0-9a-zA-Z] / minus ) ( ( underline )? ( [0-9a-zA-Z] / minus ) )*
 
 # Section 3.4.2
@@ -401,7 +390,6 @@ block_declarative_item <- subprogram_declaration
 / subtype_declaration
 / constant_declaration
 / signal_declaration
-# / /shared_/variable_declaration
 / variable_declaration
 / file_declaration
 / alias_declaration
@@ -432,24 +420,18 @@ block_header <-
 
 # Section 3.4.2
 block_specification <-
-# /architecture_/name
 name
-# / /block_statement_/label
-/ label
-#/ generate_statement_label ( lrpar generate_specification rrpar )?
 / label ( lrpar generate_specification rrpar )?
+/ label
 
 # Section 11.2
 block_statement <-
-# /block_/label colon
 label colon
-# _block ( lrpar /guard_/condition rrpar )? ( _is )?
 _block ( lrpar condition rrpar )? ( _is )?
 block_header
 block_declarative_part
 _begin
 block_statement_part
-#_end _block ( /block_/label )? semicolon
 _end _block ( label )? semicolon
 
 # Section 11.2
@@ -458,28 +440,23 @@ block_statement_part <-
 
 # Section 11.8
 case_generate_alternative <-
-# _when ( /alternative_/label colon )? choices arrow
 _when ( label colon )? choices arrow
 generate_statement_body
 
 # Section 11.8
 case_generate_statement <-
-# /generate_/label colon
 label colon
 _case expression _generate
 case_generate_alternative
 ( case_generate_alternative )*
-# _end _generate ( /generate_/label )? semicolon
 _end _generate ( label )? semicolon
 
 # Section 10.9
 case_statement <-
-# ( /case_/label colon )?
 ( label colon )?
 _case ( '?' )? expression _is
 case_statement_alternative
 ( case_statement_alternative )*
-# _end _case ( '?' )? ( /case_/label )? semicolon
 _end _case ( '?' )? ( label )? semicolon
 
 # Section 10.9
@@ -496,8 +473,6 @@ character_literal <- < "'" < graphic_character / backslash > "'" >
 choice <-
 _others
 / simple_expression
-# / /discrete_/range
-# / /element_/simple_name
 / range
 / simple_name
 
@@ -515,22 +490,17 @@ _end _for semicolon
 # Section 6.8
 component_declaration <-
 _component identifier ( _is )?
-# ( /local_/generic_clause )?
 ( generic_clause )?
-# ( /local_/port_clause )?
 ( port_clause )?
-# _end _component ( /component_/simple_name )? semicolon
 _end _component ( simple_name )? semicolon
 
 # Section 11.7.1
 component_instantiation_statement <-
-# /instantiation_/label colon instantiated_unit
 label colon instantiated_unit
 ( generic_map_aspect )?
 ( port_map_aspect )? semicolon
 
 # Section 7.3.1
-# component_specification <- instantiation_list colon /component_/name
 component_specification <- instantiation_list colon name
 
 # Section 5.3.1
@@ -622,12 +592,10 @@ waveform _when condition
 
 # Section 3.4.1
 configuration_declaration <-
-# _configuration identifier _of /entity_/name _is
 _configuration identifier _of name _is
 configuration_declarative_part
 ( verification_unit_binding_indication semicolon )*
 block_configuration
-# _end ( _configuration )? ( /configuration_/simple_name )? semicolon
 _end ( _configuration )? ( simple_name )? semicolon
 
 # Section 3.4.1
@@ -655,7 +623,6 @@ _constant identifier_list colon subtype_indication ( var_assignment expression )
 
 # Section 5.3.2.1
 constrained_array_definition <-
-# _array index_constraint _of /element_/subtype_indication
 _array index_constraint _of subtype_indication
 
 # Section 6.3
@@ -671,7 +638,6 @@ context_clause <- ( context_item )*
 context_declaration <-
 _context identifier _is
 context_clause
-# _end ( _context )? ( /context_/simple_name )? semicolon
 _end ( _context )? ( simple_name )? semicolon
 
 # Section 13.4
@@ -690,7 +656,6 @@ decimal_literal <- integer ( dot integer )? ( exponent )?
 # Section 10.5.2.1
 delay_mechanism <-
 _transport
-# / ( _reject /time_/expression )? _inertial
 / ( _reject expression )? _inertial
 
 # Section 13.1
@@ -707,11 +672,9 @@ direction <- _to / _downto
 
 # Section 7.4
 disconnection_specification <-
-# _disconnect guarded_signal_specification _after /time_/expression semicolon
 _disconnect guarded_signal_specification _after expression semicolon
 
 # Section 5.3.2.1
-# discrete_range <- /discrete_/subtype_indication / range
 discrete_range <-
 range
 / subtype_indication
@@ -737,9 +700,7 @@ element_subtype_definition <- subtype_indication
 
 # Section 7.3.2.2
 entity_aspect <-
-# _entity /entity_/name ( lrpar /architecture_/identifier rrpar )?
 _entity name ( lrpar identifier rrpar )?
-# / _configuration /configuration_/name
 / _configuration name
 / _open
 
@@ -779,7 +740,6 @@ entity_header
 entity_declarative_part
 ( _begin
 entity_statement_part )?
-# _end ( _entity )? ( /entity_/simple_name )? semicolon
 _end ( _entity )? ( simple_name )? semicolon
 
 # Section 3.2.3
@@ -793,7 +753,6 @@ entity_declarative_item <- subprogram_declaration
 / subtype_declaration
 / constant_declaration
 / signal_declaration
-# / /shared_/variable_declaration
 / variable_declaration
 / file_declaration
 / alias_declaration
@@ -816,9 +775,7 @@ entity_designator <- entity_tag ( signature )?
 
 # Section 3.2.3
 entity_header <-
-# ( /formal_/generic_clause )?
 ( generic_clause )?
-# ( /formal_/port_clause )?
 ( port_clause )?
 
 # Section 7.2
@@ -834,9 +791,7 @@ entity_name_list colon entity_class
 # Section 3.2.4
 entity_statement <-
 concurrent_assertion_statement
-# / /passive_/concurrent_procedure_call_statement
 / concurrent_procedure_call_statement
-# / /passive_/process_statement
 / process_statement
 # / PSL_PSL_Directive # TODO
 
@@ -856,7 +811,6 @@ lrpar enumeration_literal ( comma enumeration_literal )* rrpar
 
 # Section 10.2
 exit_statement <-
-# ( label colon )? _exit ( /loop_/label )? ( _when condition )? semicolon
 ( label colon )? _exit ( label )? ( _when condition )? semicolon
 
 # Section 15.5.2
@@ -909,12 +863,10 @@ file_declaration <-
 _file identifier_list colon subtype_indication ( file_open_information )? semicolon
 
 # Section 6.4.2.5
-# file_logical_name <- /string_/expression
 file_logical_name <- expression
 
 # Section 6.4.2.5
 file_open_information <-
-# ( _open /file_open_kind_/expression )? _is file_logical_name
 ( _open expression )? _is file_logical_name
 
 # Section 5.5.1
@@ -926,10 +878,6 @@ floating_type_definition <- range_constraint
 
 # Section 11.8
 for_generate_statement <-
-# /generate_/label colon
-# _for /generate_/parameter_specification _generate
-# /generate_/statement_body
-# _end _generate ( /generate_/label )? semicolon
 label colon
 _for parameter_specification _generate
 generate_statement_body
@@ -940,18 +888,13 @@ force_mode <- _in / _out
 
 # Section 6.5.7.1
 formal_designator <-
-# /generic_/name
-# / /port_/name
-# / /parameter_/name
 name
 
 # Section 4.2.2.1
-# formal_parameter_list <- /parameter_/interface_list
 formal_parameter_list <- interface_list
 
 # Section 6.5.7.1
 formal_part <-
-# / /function_/name lrpar formal_designator rrpar
 name lrpar formal_designator rrpar
 / type_mark lrpar formal_designator rrpar
 / formal_designator
@@ -962,7 +905,6 @@ _type identifier _is type_definition semicolon
 
 # Section 9.3.4
 function_call <-
-# /function_/name ( lrpar actual_parameter_part rrpar )?
 identifier lrpar ( actual_parameter_part )? rrpar
 
 # Section 4.2.1
@@ -973,9 +915,6 @@ subprogram_header
 
 # Section 3.4.2
 generate_specification <-
-# /static_/discrete_range
-# / /static_/expression
-# / /alternative_/label
 discrete_range
 / expression
 / label
@@ -991,7 +930,6 @@ generate_statement_body <-
 ( block_declarative_part
 _begin )?
 ( concurrent_statement )*
-# ( _end ( /alternative_/label )? semicolon )?
 ( _end ( label )? semicolon )?
 
 # Section 6.5.6.2
@@ -999,12 +937,10 @@ generic_clause <-
 _generic lrpar generic_list rrpar semicolon
 
 # Section 6.5.6.2
-# generic_list <- /generic_/interface_list
 generic_list <- interface_list
 
 # Section 6.5.6.2
 generic_map_aspect <-
-# _generic _map lrpar /generic_/association_list rrpar
 _generic _map lrpar association_list rrpar
 
 # Section 15.2
@@ -1019,7 +955,6 @@ group_constituent_list <- group_constituent ( comma group_constituent )*
 
 # Section 6.10
 group_declaration <-
-# _group identifier colon /group_template_/name lrpar group_constituent_list rrpar semicolon
 _group identifier colon name lrpar group_constituent_list rrpar semicolon
 
 # Section 6.9
@@ -1028,7 +963,6 @@ _group identifier _is lrpar entity_class_entry_list rrpar semicolon
 
 # Section 7.4
 guarded_signal_specification <-
-# /guarded_/signal_list colon type_mark
 signal_list colon type_mark
 
 # Section 15.4.1
@@ -1038,15 +972,6 @@ identifier <- extended_identifier / basic_identifier
 identifier_list <- identifier ( comma identifier )*
 
 # Section 11.8
-# if_generate_statement <-
-# /generate_/label colon
-# _if ( /alternative_/label colon )? condition _generate
-# generate_statement_body
-# ( _elsif ( /alternative_/label colon )? condition _generate
-# generate_statement_body )*
-# ( _else ( /alternative_/label colon )? _generate
-# generate_statement_body )?
-# _end _generate ( /generate_/label )? semicolon
 if_generate_statement <-
 label colon
 _if ( label colon )? condition _generate
@@ -1059,14 +984,12 @@ _end _generate ( label )? semicolon
 
 # Section 10.8
 if_statement <-
-# ( /if_/label colon )?
 ( label colon )?
 _if condition _then
 sequence_of_statements
 ( _elsif condition _then
 sequence_of_statements )*
 ( _else sequence_of_statements )?
-# _end _if ( /if_/label )? semicolon
 _end _if ( label )? semicolon
 
 # Section 5.4.2
@@ -1084,16 +1007,12 @@ index_subtype_definition <- type_mark _range box
 
 # Section 11.7.1
 instantiated_unit <-
-# ( _component )? /component_/name
-# / _entity /entity_/name ( lrpar /architecture_/identifier rrpar )?
-# / _configuration /configuration_/name
 _entity name ( lrpar identifier rrpar )?
 / _configuration name
 / ( _component )? name
 
 # Section 7.3.1
 instantiation_list <-
-# /instantiation_/label ( comma /instantiation_/label )*
 _others
 / _all
 / label ( comma label )*
@@ -1106,7 +1025,6 @@ integer_type_definition <- range_constraint
 
 # Section 6.5.2
 interface_constant_declaration <-
-# ( _constant )? identifier_list colon ( _in )? subtype_indication ( var_assignment /static_/expression )?
 ( _constant )? identifier_list colon ( _in )? subtype_indication ( var_assignment expression )?
 
 # Section 6.5.1
@@ -1144,7 +1062,6 @@ interface_signal_declaration
 # Section 6.5.5
 interface_package_declaration <-
 _package identifier _is
-# _new /uninstantiated_package_/name interface_package_generic_map_aspect
 _new name interface_package_generic_map_aspect
 
 # Section 6.5.5
@@ -1160,7 +1077,6 @@ _procedure designator
 
 # Section 6.5.2
 interface_signal_declaration <-
-# ( _signal )? identifier_list colon ( mode )? subtype_indication ( _bus )? ( var_assignment /static_/expression )?
 ( _signal )? identifier_list colon ( mode )? subtype_indication ( _bus )? ( var_assignment expression )?
 
 # Section 6.5.4
@@ -1168,7 +1084,6 @@ interface_subprogram_declaration <-
 interface_subprogram_specification ( _is interface_subprogram_default )?
 
 # Section 6.5.4
-# interface_subprogram_default <- /subprogram_/name / box
 interface_subprogram_default <- name / box
 
 # Section 6.5.4
@@ -1180,13 +1095,11 @@ interface_type_declaration <- interface_incomplete_type_declaration
 
 # Section 6.5.2
 interface_variable_declaration <-
-# ( _variable )? identifier_list colon ( mode )? subtype_indication ( var_assignment /static_/expression )?
 ( _variable )? identifier_list colon ( mode )? subtype_indication ( var_assignment expression )?
 
 # Section 10.10
 iteration_scheme <-
 _while condition
-# / _for /loop_/parameter_specification
 / _for parameter_specification
 
 # Section 11.8
@@ -1229,11 +1142,9 @@ logical_operator <- _and / _or / _nand / _nor / _xor / _xnor
 
 # Section 10.10
 loop_statement <-
-# ( /loop_/label colon )?
 ( label colon )?
 ( iteration_scheme )? _loop
 sequence_of_statements
-# _end _loop ( /loop_/label )? semicolon
 _end _loop ( label )? semicolon
 
 # Section 9.2.1
@@ -1247,16 +1158,6 @@ mode <- _inout / _in / _out / _inout / _buffer / _linkage
 multiplying_operator <- mult / div / _mod / _rem
 
 # Section 8.1
-#name <-
-#simple_name
-#/ operator_symbol
-#/ character_literal
-#/ selected_name
-#/ indexed_name
-#/ slice_name
-#/ attribute_name
-#/ external_name
-
 # 'name' is left-recursive because the following use "prefix", which uses 'name'
 # - selected_name
 # - indexed_name
@@ -1291,7 +1192,6 @@ attribute_name_part <-
 
 # Section 10.11
 next_statement <-
-# ( label colon )? _next ( /loop_/label )? ( _when condition )? semicolon
 ( label colon )? _next ( label )? ( _when condition )? semicolon
 
 # Section 10.14
@@ -1315,9 +1215,6 @@ operator_symbol <- string_literal
 
 # Section 4.8
 package_body <-
-# _package _body /package_/simple_name _is
-# package_body_declarative_part
-# _end ( _package _body )? ( /package_/simple_name )? semicolon
 _package _body simple_name _is
 package_body_declarative_part
 _end ( _package _body )? ( simple_name )? semicolon
@@ -1350,7 +1247,6 @@ package_body_declarative_part <-
 package_declaration <-
 _package identifier _is
 package_header package_declarative_part
-# _end ( _package )? ( /package_/simple_name )? semicolon
 _end ( _package )? ( simple_name )? semicolon
 
 # Section 4.7
@@ -1387,13 +1283,11 @@ package_header <-
 
 # Section 4.9
 package_instantiation_declaration <-
-# _package identifier _is _new /uninstantiated_package_/name
 _package identifier _is _new name
 ( generic_map_aspect )? semicolon
 
 # Section 8.7
 package_pathname <-
-# '@' /library_/logical_name dot ( /package_/simple_name dot )* /object_/simple_name
 '@' logical_name dot ( simple_name dot )* simple_name
 
 # Section 10.10
@@ -1401,22 +1295,15 @@ parameter_specification <-
 identifier _in discrete_range
 
 # Section 8.7
-# partial_pathname <- ( pathname_element dot )* /object_/simple_name
 partial_pathname <- ( pathname_element dot )* simple_name
 
 # Section 8.7
 pathname_element <-
-# /entity_/simple_name
-# / /component_instantiation_/label
-# / /block_/label
-# / /generate_statement_/label ( lrpar /static_/expression rrpar )?
-# / /package_/simple_name
 simple_name
 / label
 / label ( lrpar expression rrpar )?
 
 # Section 5.2.4.1
-# physical_literal <- ( abstract_literal )? /unit_/name
 physical_literal <- ( abstract_literal )? name
 
 # Section 5.2.4.1
@@ -1425,7 +1312,6 @@ range_constraint
 _units
 primary_unit_declaration
 ( secondary_unit_declaration )*
-# _end _units ( /physical_type_/simple_name )?
 _end _units ( simple_name )?
 
 # Section 6.5.6.3
@@ -1433,12 +1319,10 @@ port_clause <-
 _port lrpar port_list rrpar semicolon
 
 # Section 6.5.6.3
-# port_list <- /port_/interface_list
 port_list <- interface_list
 
 # Section 6.5.7.3
 port_map_aspect <-
-# _port _map lrpar /port_/association_list rrpar
 _port _map lrpar association_list rrpar
 
 # Section 8.1
@@ -1474,7 +1358,6 @@ entity_declaration
 primary_unit_declaration <- identifier semicolon
 
 # Section 10.7
-# procedure_call <- /procedure_/name ( lrpar actual_parameter_part rrpar )?
 procedure_call <- name ( lrpar actual_parameter_part rrpar )?
 
 # Section 10.7
@@ -1514,13 +1397,11 @@ process_sensitivity_list <- _all / sensitivity_list
 
 # Section 11.3
 process_statement <-
-# ( /process_/label colon )?
 ( label colon )?
 ( _postponed )? _process ( lrpar process_sensitivity_list rrpar )? ( _is )?
 process_declarative_part
 _begin
 process_statement_part
-# _end ( _postponed )? _process ( /process_/label )? semicolon
 _end ( _postponed )? _process ( label )? semicolon
 
 # Section 11.3
@@ -1531,7 +1412,6 @@ process_statement_part <-
 protected_type_body <-
 _protected _body
 protected_type_body_declarative_part
-# _end _protected _body ( /protected_type_/simple_name )?
 _end _protected _body ( simple_name )?
 
 # Section 5.6.3
@@ -1562,7 +1442,6 @@ protected_type_body_declarative_part <-
 protected_type_declaration <-
 _protected
 protected_type_declarative_part
-# _end _protected ( /protected_type_/simple_name )?
 _end _protected ( simple_name )?
 
 # Section 5.6.2
@@ -1588,7 +1467,6 @@ type_mark quot_s lrpar expression rrpar
 
 # Section 5.2.1
 range <-
-# /range_/attribute_name
 simple_expression ( direction simple_expression )?
 / attribute_name
 
@@ -1600,11 +1478,9 @@ record_constraint <-
 lrpar record_element_constraint ( comma record_element_constraint )* rrpar
 
 # Section 5.3.3
-# record_element_constraint <- /record_element_/simple_name element_constraint
 record_element_constraint <- simple_name element_constraint
 
 # Section 6.3
-# record_element_resolution <- /record_element_/simple_name resolution_indication
 record_element_resolution <- simple_name resolution_indication
 
 # Section 6.3
@@ -1615,7 +1491,6 @@ record_type_definition <-
 _record
 element_declaration
 ( element_declaration )*
-# _end _record ( /record_type_/simple_name )?
 _end _record ( simple_name )?
 
 # Section 9.1
@@ -1635,7 +1510,6 @@ _report expression
 ( _severity expression )? semicolon
 
 # Section 6.3
-# resolution_indication <- /resolution_function_/name / lrpar element_resolution rrpar
 resolution_indication <- name / lrpar element_resolution rrpar
 
 # Section 10.13
@@ -1693,7 +1567,6 @@ waveform _when choices
 sensitivity_clause <- _on sensitivity_list
 
 # Section 10.2
-# sensitivity_list <- /signal_/name ( comma /signal_/name )*
 sensitivity_list <- name ( comma name )*
 
 # Section 10.1
@@ -1741,7 +1614,6 @@ signal_kind <- _register / _bus
 
 # Section 7.4
 signal_list <-
-# /signal_/name ( comma /signal_/name )*
 _others
 / _all
 / name ( comma name )*
@@ -1788,7 +1660,6 @@ target var_assignment expression semicolon
 #slice_name <- identifier lrpar discrete_range rrpar
 
 # Section 15.7
-#string_literal <- quot_d ( quot_d quot_d / graphic_character )* quot_d
 string_literal <-  < ["] < (quot_d quot_d / !["] .)* > ["] >
 
 # Section 4.3
@@ -1834,7 +1705,6 @@ subprogram_header <-
 
 # Section 4.4
 subprogram_instantiation_declaration <-
-# subprogram_kind identifier _is _new /uninstantiated_subprogram_/name ( signature )?
 subprogram_kind identifier _is _new name ( signature )?
 ( generic_map_aspect )? semicolon
 
@@ -1855,7 +1725,6 @@ _subtype identifier _is subtype_indication semicolon
 
 # Section 6.3
 subtype_indication <-
-# ( resolution_indication type_mark / type_mark ) ( constraint )?
 name + ( constraint )?
 
 # Section 8.3
@@ -1875,7 +1744,6 @@ term <-
 factor ( multiplying_operator factor )*
 
 # Section 10.2
-# timeout_clause <- _for /time_/expression
 timeout_clause <- _for expression
 
 # Section 15.11
@@ -1900,13 +1768,10 @@ protected_type_definition
 
 # Section 6.3
 type_mark <- name
-#type_name
-#/ subtype_name
 
 # Section 5.3.2.1
 unbounded_array_definition <-
 _array lrpar index_subtype_definition ( comma index_subtype_definition )* rrpar
-# _of /element_/subtype_indication
 _of subtype_indication
 
 # Section 12.4
@@ -1928,7 +1793,6 @@ verification_unit_binding_indication <-
 _use _vunit verification_unit_list
 
 # Section 7.3.4
-# verification_unit_list <- /verification_unit_/name ( comma /verification_unit_/name )*
 verification_unit_list <- name ( comma name )*
 
 # Section 10.2
@@ -1942,7 +1806,5 @@ waveform_element ( comma waveform_element )*
 
 # Section 10.5.2.2
 waveform_element <-
-# /value_/expression ( _after /time_/expression )?
-# / _null ( _after /time_/expression )?
 expression ( _after expression )?
 / _null ( _after expression )?
