@@ -1,5 +1,7 @@
 # VHDL Parser
 
+[![](https://github.com/iain-waugh/vhdl-parser/workflows/cmake/badge.svg)](https://github.com/iain-waugh/vhdl-parser/actions)
+
 #  1 Overview
 
 This project aims to provide an open-source parser for VHDL 2008, staying as close to IEEE Std 1076-2008 as I could get without having left recursion in the grammar (I'm looking at you, `prefix`).
