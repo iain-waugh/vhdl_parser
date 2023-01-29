@@ -18,10 +18,31 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-latest] #, macos-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v3
+
+    # Caching thanks to: https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html
+    - name: Cache boost
+      uses: actions/cache@v1.0.3
+      id: cache-boost
+      with:
+        path: "~/boost"
+        key: libboost1.81-dev
+    - name: Install boost
+      env:
+        CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
+      run: |
+        if [[ "$CACHE_HIT" == 'true' ]]; then
+          sudo cp --force --recursive ~/boost/* /
+        else
+          sudo apt-get update && sudo apt-get install -yq libboost1.81-dev
+          mkdir -p ~/boost
+          for dep in libboost1.81-dev; do
+              dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
+          done
+        fi
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
