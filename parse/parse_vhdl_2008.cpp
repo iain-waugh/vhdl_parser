@@ -911,7 +911,7 @@ factor <-
 _abs primary
 / _not primary
 / primary ( exponential primary )?
-/ logical_operator primary
+# / logical_operator primary # Causes a bug in "if (A_MSB < B_LSB or B_MSB < A_LSB) then"
 
 # Section 6.4.2.5
 file_declaration <-
@@ -1391,13 +1391,13 @@ _port _map lrpar association_list rrpar
 # Section 9.1
 primary <-
 attribute_name
+/ lrpar expression rrpar
 / qualified_expression
 / name !quot_d
 / function_call
 / aggregate
 / type_conversion
 / allocator
-/ lrpar expression rrpar
 / literal
 
 # Section 13.1
