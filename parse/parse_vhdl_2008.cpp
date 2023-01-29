@@ -1674,7 +1674,7 @@ _others
 / name ( comma name )*
 
 # Section 4.5.3
-signature <- ( ( type_mark ( comma type_mark )* )? ( _return type_mark )? )?
+signature <- "[" ( type_mark ( comma type_mark )* )? ( _return type_mark )? "]"
 
 # Section 7.3.1
 simple_configuration_specification <-
