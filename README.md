@@ -1,6 +1,6 @@
 # VHDL Parser
 
-[![](https://github.com/iain-waugh/vhdl-parser/workflows/cmake/badge.svg)](https://github.com/iain-waugh/vhdl-parser/actions)
+[![CMake](https://github.com/iain-waugh/vhdl_parser/actions/workflows/cmake.yml/badge.svg)](https://github.com/iain-waugh/vhdl_parser/actions/workflows/cmake.yml)
 
 #  1 Overview
 
