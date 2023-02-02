@@ -161,10 +161,10 @@ keyword <- _abs / _access / _after / _alias / _all / _and / _architecture / _arr
 
 # ------------------------------------------------------------------------
 # Character set : Section 15.2
-upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ]
-lower_case_letter <- [a-z] / [àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ]
+upper_case_letter <- [A-Z] / [ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞß]
+lower_case_letter <- [a-z] / [àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]
 special_character <- space / quot_d / [#&'()*+,-./:;<=>?@\[\]_`|]
-other_special_character <- backslash backslash / [!$%^{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
+other_special_character <- backslash backslash / [!$%^{}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿×÷]
 digit <- [0-9]
 
 delimiter <- !( upper_case_letter / lower_case_letter / digit / '_' )
@@ -179,8 +179,8 @@ delimiter <- !( upper_case_letter / lower_case_letter / digit / '_' )
 colon     <- ":"
 semicolon <- ";"
 lrpar     <- "("
-rrpar     <- ')'
-#backtick  <- '`'
+rrpar     <- ")"
+#backtick  <- "`"
 quot_s    <- "'"
 quot_d    <- '"'
 backslash <- "\\"
@@ -467,7 +467,8 @@ sequence_of_statements
 # Section 15.6
 # PEG parser notes: need to locally disable whitespace using the '< >' tokenisers
 # https://github.com/yhirose/cpp-peglib/issues/44
-character_literal <- < "'" < graphic_character / backslash > "'" >
+character_literal <- < "'" < . > "'" >
+#character_literal <- < "'" < graphic_character / backslash > "'" >
 
 # Section 9.3.3.1
 choice <-
