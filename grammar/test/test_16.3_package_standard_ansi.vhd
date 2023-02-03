@@ -1,4 +1,10 @@
-package STANDARD is
+-------------------------------------------------------------------------------
+--
+-- IEEE Std 1076-2008 VHDL "Standard" Library in ANSI format
+--
+-------------------------------------------------------------------------------
+
+package standard is
 -- Predefined enumeration types:
   type boolean is (false, true);
   type bit is ('0', '1');
@@ -7,7 +13,7 @@ package STANDARD is
     BS, HT, LF, VT, FF, CR, SO, SI,
     DLE, DC1, DC2, DC3, DC4, NAK, SYN, ETB,
     CAN, EM, SUB, ESC, FSP, GSP, RSP, USP,
-    ' ', '!', '"',   '#',   '$',   '%',   '&',   ''',
+    ' ', '!', '"', '#', '$', '%', '&', ''',
     '(', ')', '*', '+', ',', '-', '.', '/',
     '0', '1', '2', '3', '4', '5', '6', '7',
     '8', '9', ':', ';', '<', '=', '>', '?',
@@ -23,7 +29,7 @@ package STANDARD is
     C136, C137, C138, C139, C140, C141, C142, C143,
     C144, C145, C146, C147, C148, C149, C150, C151,
     C152, C153, C154, C155, C156, C157, C158, C159,
-    -- ' ', '¡', '¢', '£', '¤', '¥', '¦', '§',
+    ' ', '¡', '¢', '£', '¤', '¥', '¦', '§',
     '¨', '©', 'ª', '«', '¬', '­', '®', '¯',
     '°', '±', '²', '³', '´', 'µ', '¶', '·',
     '¸', '¹', 'º', '»', '¼', '½', '¾', '¿',
@@ -35,12 +41,12 @@ package STANDARD is
     'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï',
     'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', '÷',
     'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ');
-  - type severity_level is (note, warning, error, failure);
+  type severity_level is (note, warning, error, failure);
 --- Predefined numeric types:
-  type integer is range implementation_defined;
-  type real is range implementation_defined;
+  type integer is range -2147483647 to 2147483647; -- Limits defined by §5.2.3.1
+  type real is range -1.0E308 to 1.0E308;
 --- Predefined type TIME:
-  type time is range implementation_defined
+  type time is range -2147483647 to 2147483647
     units
       fs;             -- femtosecond
       ps = 1000 fs;   -- picosecond
@@ -52,17 +58,17 @@ package STANDARD is
       hr = 60 min;    -- hour
     end units;
   subtype delay_length is time range 0 fs to time'high;
-  impure function NOW return delay_length;
+  impure function now return delay_length;
 -- Predefined numeric subtypes:
   subtype natural is integer range 0 to integer'high;
   subtype positive is integer range 1 to integer'high;
 -- Predefined array types:
   type string is array (positive range <>) of character;
-  type BOOLEAN_VECTOR is array (natural range <>) of boolean;
+  type boolean_vector is array (natural range <>) of boolean;
   type bit_vector is array (natural range <>) of bit;
-  type INTEGER_VECTOR is array (natural range <>) of integer;
-  type REAL_VECTOR is array (natural range <>) of real;
-  type TIME_VECTOR is array (natural range <>) of time;
+  type integer_vector is array (natural range <>) of integer;
+  type real_vector is array (natural range <>) of real;
+  type time_vector is array (natural range <>) of time;
   type file_open_kind is (
     read_mode,        -- Resulting access mode is read-only.
     write_mode,       -- Resulting access mode is write-only.
@@ -74,7 +80,5 @@ package STANDARD is
     status_error,     -- File object was already open.
     name_error,       -- External file not found or inaccessible.
     mode_error);      -- Could not open file with requested access mode.
-  return file_open_status;
-  return file_open_status;
-  attribute FOREIGN : string;
-end STANDARD;
+  attribute foreign : string;
+end standard;
