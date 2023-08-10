@@ -10,11 +10,15 @@ It is released under the MIT license.
 
 ## 1.1 Current status
 
-It is currently a work-in-progress, where the PEG definition file has been the focus of attention.  At this point in time:
+It is currently abandoned because I've found a better, faster way to create an AST.
+
+At this point in time:
 
 - The code will compile and the executable should parse a VHDL'93 file and print its Abstract Syntax Tree (AST) to the standard output.
 - VHDL 2008 may partially work, but isn't fully tested.
 - 'special characters' with ASCII codes of 160 or higher are not parsed properly
+
+At best, it's a reference for multi-platform builds.
 
 
 
