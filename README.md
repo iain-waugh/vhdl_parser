@@ -8,15 +8,17 @@ It is released under the MIT license.
 
 ## 1.1 Current status
 
-It is currently abandoned because I've found a better, faster way to create an AST.
+It is currently abandoned because I've found a better, faster way to create an AST with tree-sitter.
 
 At this point in time:
 
-- The code will compile and the executable should parse a VHDL'93 file and print its Abstract Syntax Tree (AST) to the standard output.
+- The code will compile and the executable should parse some VHDL'93 files (but not all) and print its Abstract Syntax Tree (AST) to the standard output.
 - VHDL 2008 may partially work, but isn't fully tested.
 - 'special characters' with ASCII codes of 160 or higher are not parsed properly
 
 At best, it's a reference for multi-platform builds.
+
+If this project starts up again, I noticed that `cpp-peglib` now allows you to run a parse operation starting from any point in the PEG syntax, so you don't need to try to debug from the top-level all the time ([see this link]([Changing root feature · Issue #304 · yhirose/cpp-peglib · GitHub](https://github.com/yhirose/cpp-peglib/issues/304#issuecomment-2323518735))).  This is quite the game-changer and would allow for proper unit-testing to guarantee lower PEG syntax levels are working properly before trying more complex ones.  The `cpp-peglib.h` that supports this is in this project now.
 
 ## 1.2 Multi-Platform Build
 
