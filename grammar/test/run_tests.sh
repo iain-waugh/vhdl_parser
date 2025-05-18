@@ -18,5 +18,5 @@ echo "Testing section 11.3  : process"
 grep - results/result_11.3_process.txt | sed -e 's/^[ \t]*//'> results/summary_11.3_process.txt
 
 echo "Testing section 16.3  : standard library"
-../peglint ../vhdl2008.peg --packrat --ast test_16.3_package_standard_utf8.vhd > results/test_16.3_package_standard_utf8.txt
-grep - results/test_16.3_package_standard_utf8.txt | sed -e 's/^[ \t]*//'> results/summary_16.3_package_standard_utf8.txt
+../peglint ../vhdl2008.peg --packrat --ast test_16.3_package_standard_utf8.vhd > results/result_16.3_package_standard_utf8.txt
+grep - results/result_16.3_package_standard_utf8.txt | sed -e 's/^[ \t]*//'> results/summary_16.3_package_standard_utf8.txt
