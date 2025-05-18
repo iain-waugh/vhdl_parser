@@ -1,12 +1,10 @@
 # VHDL Parser
 
-#  1 Overview
+# 1 Overview
 
-This project aims to provide an open-source parser for VHDL 2008, staying as close to IEEE Std 1076-2008 as I could get without having left recursion in the grammar (I'm looking at you, `prefix`).
+This project aims to provide an open-source parser for VHDL 2008, staying as close to IEEE Std 1076-2008 as I could get without having left-recursion in the grammar (I'm looking at you, `prefix`).
 
 It is released under the MIT license.
-
-
 
 ## 1.1 Current status
 
@@ -20,19 +18,22 @@ At this point in time:
 
 At best, it's a reference for multi-platform builds.
 
-
-
-##  1.2 Multi-Platform Build
+## 1.2 Multi-Platform Build
 
 This project requires `cmake` and the Boost library (for '`program_options`') to build.
 
-Under MSys2, `pacboy find boost` to see which libraries are available and `pacman -S <package>` to install.
+Under Windows MSys2, `pacboy find boost :p` to see which libraries are available and `pacman -S <package>` to install.
 
-**Example for 64-bit MinGW under MSys2:**
+**Example for 64-bit UCRT under MSys2:**
 
-`pacman -S mingw64/mingw-w64-x86_64-boost`
+```bash
+pacman -S mingw-w64-ucrt-x86_64-toolchain
+pacman -S ucrt64/mingw-w64-ucrt-x86_64-boost
+```
 
 **Building:**
+
+Set `BOOST_ROOT` to point to the Boost library install folder.
 
 ```bash
 mkdir build && cd build
@@ -40,13 +41,11 @@ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make
 ```
 
-
+Note: MSVC buids fail because it can't cope with the really, really long string that contains the PEG definition.
 
 # 2 Thanks
 
 This parser would not be possible without Y Hirose's [cpp-peglib.h](https://github.com/yhirose/cpp-peglib), and debugging the PEG grammar was **greatly** assisted by Mirko Kunze's [pegdebug](https://github.com/mqnc/pegdebug.git) and the linter that's in cpp-pegilb.h.
-
-
 
 # 3 Testing
 
