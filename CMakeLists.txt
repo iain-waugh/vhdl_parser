@@ -5,6 +5,7 @@ project(vhdl_parser LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(Boost_USE_STATIC_LIBS ON) # or OFF depending on the build requirement
 find_package(Boost REQUIRED program_options)
 
 add_subdirectory(parse)
